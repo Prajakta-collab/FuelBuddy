@@ -3,7 +3,7 @@ import React from 'react'
 const HomeAtt = () => {
   return (
     <div>
-      pump attendant's home page
+      pump home 
     </div>
   )
 }
