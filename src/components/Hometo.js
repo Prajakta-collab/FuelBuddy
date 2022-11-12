@@ -2,6 +2,10 @@ import React from 'react'
 import Navbar from './Navbar'
 
 const Hometo = () => {
+
+  const requestSubmit=()=>{
+    //submit request
+ }
   return (
     <div>
       <Navbar />
@@ -30,14 +34,28 @@ const Hometo = () => {
         <p class="h4">Fuel Request</p>
         <form class="border border-dark p-3" for>
           <div class="mb-3 mr-auto d-flex" >
-            <div class="mx-3"><label class="form-label"><p class="h6">Fuel Quantity</p></label></div>
-            <div class="w-75"><input type="text" class="form-control" placeholder=""></input></div>
+            <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Fuel Quantity</p></label></div>
+            <div class="w-75">
+              <input 
+              type="text" 
+              className="form-control" 
+              placeholder="Enter amount in Litres"
+              minLength={1} required
+              />
+            </div>
           </div>
           <div class="mb-3 mr-auto d-flex" >
-            <div class="mx-3"><label class="form-label"><p class="h6">Vehicle Number</p></label></div>
-            <div class="w-75"><input type="text" class="form-control"></input></div>
+            <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Vehicle Number</p></label></div>
+            <div class="w-75">
+              <input 
+              type="text"
+              className="form-control" 
+              placeholder="Enter Vehicle registration number"
+              minLength={6} required
+              />
+            </div>
           </div>
-          <div class="text-center"><button type="submit" class="btn btn-primary" onclick="myFunction()">Submit</button></div>
+          <div class="text-center"><button type="submit" class="btn btn-primary" onClick={requestSubmit}>Submit</button></div>
         </form>
       </div>
     </div>

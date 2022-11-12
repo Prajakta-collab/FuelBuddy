@@ -14,6 +14,8 @@ import Hometo from "./components/Hometo";
 import Login from './components/Login';
 import Truck from "./components/Truck";
 
+import Customercard from "./components/PumpOwner/Customercard";
+import PumpAttendant from "./components/PumpOwner/PumpAttendant"
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/home/pumpattendant/:id" element={<HomeAtt/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/home/pumpo/customersdetail" element={<Customercard/>}/>
+        <Route path="/home/pumpo/pumpat" element={<PumpAttendant/>}></Route>
       </Routes>
     </BrowserRouter>
     </div>
