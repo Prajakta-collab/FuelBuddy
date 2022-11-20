@@ -16,7 +16,35 @@ const HomeAtt = () => {
         setOpenModal(true);
     }
   return (
+
+    <div>
    
+<Navbar/>
+{/* <AddCust/> */}
+{/* prajakta branch */}
+{/* <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> */}
+
+<div className="d-flex" id="wrapper">
+{toggle&& <div style={{backgroundColor:"#3282B8"}} id="sidebar-wrapper">
+    <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
+            className="fas fa-user-secret me-2"></i>FuelBuddy</div>
+    <div className="list-group list-group-flush my-3">
+        <a href="/" className="list-group-item list-group-item-action bg-transparent second-text active"><i
+                className="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+        <a href="/" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                className="fas fa-project-diagram me-2"></i>Customers</a>
+                 <a href="/" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                className="fas fa-paperclip me-2"></i>Daily Transactions</a>
+        <a href="/" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                className="fas fa-chart-line me-2"></i>About</a>
+       
+       
+        <a href="/" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                className="fas fa-power-off me-2"></i>Logout</a>
+    </div>
+</div>}
 
 <div id="page-content-wrapper">
     <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -181,6 +209,9 @@ const HomeAtt = () => {
         </div>
     </div>
 </div>
+</div>
+</div>
+
     )
 }
 
