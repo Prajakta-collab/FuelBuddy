@@ -71,7 +71,7 @@ const PumpAttendant = () => {
                 </div>
                 <div className="row my-5">
                     <div className="col">
-                        <table className="table bg-white rounded shadow-sm  table-hover">
+                        <table className="table bg-white rounded shadow-sm  table-hover" width="900">
                             <thead>
                                 <tr class="table-primary">
                                     <th scope="col" width="50">#</th>
@@ -79,6 +79,7 @@ const PumpAttendant = () => {
                                     <th scope="col">Attendant Name</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Shift</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,6 +89,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
 
                                 <tr>
@@ -96,6 +98,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Evening</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
@@ -103,6 +106,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">4</th>
@@ -110,6 +114,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">5</th>
@@ -117,6 +122,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Evening</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">6</th>
@@ -124,6 +130,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Evening</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">7</th>
@@ -131,6 +138,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">8</th>
@@ -138,6 +146,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Evening</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">9</th>
@@ -145,6 +154,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">10</th>
@@ -152,6 +162,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">11</th>
@@ -159,6 +170,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Evening</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">12</th>
@@ -166,6 +178,7 @@ const PumpAttendant = () => {
                                     <td>Jonny</td>
                                     <td>89346728</td>
                                     <td>Morning</td>
+                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                 </tr>
                             </tbody>
                         </table>
