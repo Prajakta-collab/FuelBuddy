@@ -3,9 +3,6 @@ import Navbar from  '../components/Navbar'
 import CountUp from 'react-countup';
 import { Link ,useLocation, useHistory } from "react-router-dom";
 
-
-
-
 const HomeAtt = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
@@ -19,7 +16,9 @@ const HomeAtt = () => {
         setOpenModal(true);
     }
   return (
-   <>
+
+    <div>
+   
 <Navbar/>
 {/* <AddCust/> */}
 {/* prajakta branch */}
@@ -93,7 +92,7 @@ const HomeAtt = () => {
         </div>
 
         <div className="row my-5">
-            <h3 className="fs-4 mb-3">Customers</h3>
+            <h3 className="fs-4 mb-3">Pending Requests</h3>
             <div className="col">
                 <table className="table bg-white rounded shadow-sm  table-hover">
                     <thead>
@@ -101,125 +100,119 @@ const HomeAtt = () => {
                             <th scope="col" width="50">#</th>
                             <th scope="col">Customer ID</th>
                             <th scope="col">Customer Name</th>
-                            <th scope="col">Total Credit</th>
-                            <th scope="col">Credit Remaining</th>
-                            <th scope="col">Registration Number </th>
+                            <th scope="col">Vehicle Number</th>
+                            <th scope="col">Requested Credit</th>
+                            <th scope="col">Submit</th>
                         </tr>
                     </thead>
                     <tbody>
-                    
                         <tr>
-
                             <th scope="row">1</th>
-                            <td><Link to="/home/pumpo/cust/32uoeji">32uoej1 </Link></td>
+                            <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
-                            <td>12,000</td>
                             <td>MH-123</td>
-                            
+                            <td>12,000</td>
+                            <td><button type="submit" class="btn btn-outline-primary btn-hover">Request Complete</button></td>
                         </tr>
                        
                         <tr>
                             <th scope="row">2</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-122</td>                        </tr>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
+                        </tr>
                         <tr>
                             <th scope="row">3</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-121</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">4</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-124</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">5</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-134</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">6</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-127</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">7</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-129</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">8</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-198</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">9</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-187</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">10</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-12398</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">11</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-154</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">12</th>
                             <td>32uoej1</td>
                             <td>Jonny</td>
-                            <td>1,00,000</td>
+                            <td>MH-123</td>
                             <td>12,000</td>
-                            <td>MH-125</td>
+                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div className="d-flex justify-content-end ">
-
-        <button type="button" class="mb-3 btn btn-primary btn-lg">Add</button>
-        </div>
     </div>
 </div>
 </div>
+</div>
 
-</>
-  )
+    )
 }
 
 export default HomeAtt

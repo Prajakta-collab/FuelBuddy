@@ -31,21 +31,6 @@ setCust({...cust,[e.target.name]:e.target.value})
              minLength={5} required
              value={cust.name}
             />
-            
-          </div>
-          <div className="form-group my2">
-            <label htmlFor="description">No of Vehicles</label>
-            <input
-              type="text"
-              className="form-control "
-              id="vehicles"
-              name="vehicles"
-              placeholder="No. of Vehicles"
-              onChange={onChange}
-              style={{height:'15vh'}} minLength={5} required
-              value={cust.vehicle_no}
-            />
-
           </div>
           <div className="form-group my-2">
             <label htmlFor="tag">Credit</label>
