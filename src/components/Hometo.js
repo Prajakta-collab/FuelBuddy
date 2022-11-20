@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState ,useContext} from 'react'
 import Navbar from './Navbar'
-
+import creditContext from '../context/credits/creditContext'
 const Hometo = () => {
 
-  const requestSubmit=()=>{
-    //submit request
- }
+  const context = useContext(creditContext);
+  const { addRequest } = context;
+
+  const[req,setReq]=useState({debit:"", vehicle_no:""})
+ 
+ const onChange=(e)=>{
+  setReq({...req,[e.target.name]:e.target.value})
+  console.log(req)
+  }
+  const handleClick=(e)=>{
+    e.preventDefault();
+    addRequest(req.debit,req.vehicle_no,"req_received")
+    setReq({debit:"", vehicle_no:""})    
+    }
   return (
     <div>
       <Navbar />
@@ -34,13 +45,17 @@ const Hometo = () => {
         <p class="h4">Fuel Request</p>
         <form class="border border-dark p-3" for>
           <div class="mb-3 mr-auto d-flex" >
-            <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Fuel Quantity</p></label></div>
+            <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Fuel Amount</p></label></div>
             <div class="w-75">
               <input 
               type="text" 
+              id="debit"
+              name="debit"
               className="form-control" 
-              placeholder="Enter amount in Litres"
+              placeholder="Enter amount in Rs"
+              onChange={onChange} 
               minLength={1} required
+              value={req.debit}
               />
             </div>
           </div>
@@ -49,13 +64,17 @@ const Hometo = () => {
             <div class="w-75">
               <input 
               type="text"
+              id="vehicle_no"
+              name="vehicle_no"
               className="form-control" 
               placeholder="Enter Vehicle registration number"
+              onChange={onChange} 
               minLength={6} required
+              value={req.vehicle_no}
               />
             </div>
           </div>
-          <div class="text-center"><button type="submit" class="btn btn-primary" onClick={requestSubmit}>Submit</button></div>
+          <div class="text-center"><button type="submit" class="btn btn-primary" onClick={handleClick}>Submit</button></div>
         </form>
       </div>
     </div>

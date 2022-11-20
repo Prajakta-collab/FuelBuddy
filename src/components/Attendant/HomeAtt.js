@@ -7,14 +7,18 @@ import creditContext from '../../context/credits/creditContext';
 const HomeAtt = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
-    const [req, setReq] = useState()
+    // const [req, setReq] = useState()
+
+   
 
     const context = useContext(creditContext);
-    const { request, credit, getrequest } = context;
+    const { request, credit, getrequest,completerequest } = context;
+
+
 
     useEffect(() => {
         getrequest();
-    }, [])
+    }, [request])
 
     console.log("request get", request)
 
@@ -38,7 +42,7 @@ const HomeAtt = () => {
 </button> */}
 
             <div className="d-flex" id="wrapper">
-                {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
+                {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
                     <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                         className="fas fa-user-secret me-2"></i>FuelBuddy</div>
                     <div className="list-group list-group-flush my-3">
@@ -55,14 +59,14 @@ const HomeAtt = () => {
                         <a href="/" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                             className="fas fa-power-off me-2"></i>Logout</a>
                     </div>
-                </div>}
+                </div>} */}
 
                 <div id="page-content-wrapper">
                     <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
-                        <div className="d-flex align-items-center">
+                        {/* <div className="d-flex align-items-center">
                             <i className="fas fa-align-left primary-text fs-4 me-3" onClick={handleToggle} id="menu-toggle"></i>
                             <h2 className="fs-2 m-0">Dashboard</h2>
-                        </div>
+                        </div> */}
 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -130,15 +134,16 @@ const HomeAtt = () => {
                  {request.length===0 && 'no notes to display'}
             {request.map((req)=>{
                 return(
-                    <div class="card">
+                    <div class="card mt-4">
                     {/* <h5 class="card-header">Customer Name</h5> */}
                 
-                    <div class="card-body card mt-3">
+                    <div class="card-body card">
                         <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
                         <p class="card-text">Customer ID</p>
                         <p class="card-text">Customer Name</p>
                         <p class="card-text">Requested Credit: {req.debit}</p>
-                        <button type="submit" class="btn btn-outline-primary">Request Complete</button>
+                        <button  class="btn btn-outline-primary" onClick={()=>{
+        completerequest(req._id)}}>Request Complete</button>
                     </div>
                 </div>)
                 })
