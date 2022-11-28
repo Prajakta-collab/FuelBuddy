@@ -17,7 +17,8 @@ import Customercard from "./components/PumpOwner/Customercard";
 import PumpAttendant from "./components/PumpOwner/PumpAttendant"
 
 import CreditState from "./context/credits/CreditState";
-
+import Signin from "./components/Signin";
+import AddCust from "./components/PumpOwner/AddCust";
 function App() {
   return (
     <div className="App">
@@ -34,8 +35,10 @@ function App() {
             <Route path="/home/pumpattendant/:id" element={<HomeAtt />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signin" element={<Signin />} />
             <Route path="/home/pumpo/customersdetail" element={<Customercard />} />
             <Route path="/home/pumpo/pumpat" element={<PumpAttendant />}></Route>
+            <Route path="/home/pumpo/addcust" element={<AddCust/>}></Route>
           </Routes>
         </BrowserRouter>
     
