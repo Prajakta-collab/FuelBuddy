@@ -96,6 +96,61 @@ setCust({...cust,[e.target.name]:e.target.value})
              value={cust.name}
             />
           </div>
+          <div className="form-group my-3">
+            <label htmlFor="title" >Email</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              aria-describedby="emailHelp"
+              placeholder="Enter Email"
+              onChange={onChange} 
+             minLength={5} required
+             value={cust.email}
+            />
+          </div>
+          <div className="form-group my-3">
+            <label htmlFor="title" >Phone Number 1</label>
+            <input
+              type="text"
+              className="form-control"
+              id="phone1"
+              name="phone1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Phone number 1"
+              onChange={onChange} 
+             minLength={10} required
+             value={cust.phone1}
+            />
+          </div>
+          <div className="form-group my-3">
+            <label htmlFor="title" >Phone Number 2</label>
+            <input
+              type="text"
+              className="form-control"
+              id="phone2"
+              name="phone2"
+              aria-describedby="emailHelp"
+              placeholder="Enter Phone number 2"
+              onChange={onChange} 
+             value={cust.phone2}
+            />
+          </div>
+          <div className="form-group my-3">
+            <label htmlFor="title" >Password</label>
+            <input
+              type="text"
+              className="form-control"
+              id="password"
+              name="password"
+              aria-describedby="emailHelp"
+              placeholder="Enter password"
+              onChange={onChange} 
+             minLength={5} required
+             value={cust.password}
+            />
+          </div>
           <div className="form-group my-2">
             <label htmlFor="tag">Credit</label>
             <input
@@ -105,11 +160,11 @@ setCust({...cust,[e.target.name]:e.target.value})
               name="credit"
               placeholder="Enter Credit Amount in Rs"
               onChange={onChange}
-              minLength={5} required
               value={cust.credit}
             />
 
           </div>
+          
          
           <button className="btn btn-primary my-3" onClick={handleClick}>
             Add Customer

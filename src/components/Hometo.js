@@ -1,8 +1,8 @@
 import React, { useState ,useContext} from 'react'
 import Navbar from './Navbar'
 import creditContext from '../context/credits/creditContext'
-const Hometo = () => {
 
+const Hometo = () => {
   const context = useContext(creditContext);
   const { addRequest } = context;
 
@@ -15,7 +15,8 @@ const Hometo = () => {
   const handleClick=(e)=>{
     e.preventDefault();
     addRequest(req.debit,req.vehicle_no,"req_received")
-    setReq({debit:"", vehicle_no:""})    
+    setReq({debit:"", vehicle_no:""}) 
+    alert('Request sent successfully!')
     }
   return (
     <div>
@@ -74,9 +75,13 @@ const Hometo = () => {
               />
             </div>
           </div>
-          <div class="text-center"><button type="submit" class="btn btn-primary" onClick={handleClick}>Submit</button></div>
+          <div class="text-center"><button type="submit" class="btn btn-primary"  onClick={handleClick}>Submit</button></div>
         </form>
       </div>
+      <div class="mt-5 mx-4 mb-2">
+
+      </div>
+      
     </div>
   )
 }

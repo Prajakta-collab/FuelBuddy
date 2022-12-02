@@ -9,10 +9,10 @@ const HomeAtt = () => {
     const ref = useRef(null)
     // const [req, setReq] = useState()
 
-   
+
 
     const context = useContext(creditContext);
-    const { request, credit, getrequest,completerequest } = context;
+    const { request, credit, getrequest, completerequest } = context;
 
 
 
@@ -109,46 +109,25 @@ const HomeAtt = () => {
                         <div className="row my-5">
                             <h3 className="fs-4 mb-3">Pending Requests</h3>
                             <div className="col">
-                                {/* <table className="table bg-white rounded shadow-sm  table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col" width="50">#</th>
-                            <th scope="col">Customer ID</th>
-                            <th scope="col">Customer Name</th>
-                            <th scope="col">Vehicle Number</th>
-                            <th scope="col">Requested Credit</th>
-                            <th scope="col">Submit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>32uoej1</td>
-                            <td>Jonny</td>
-                            <td>MH-123</td>
-                            <td>12,000</td>
-                            <td><button type="submit" class="btn btn-outline-primary">Request Complete</button></td>
-                        </tr>
-                    </tbody>
-                </table> */}
-                 {request.length===0 && 'no notes to display'}
-            {request.map((req)=>{
-                return(
-                    <div class="card mt-4">
-                    {/* <h5 class="card-header">Customer Name</h5> */}
-                
-                    <div class="card-body card">
-                        <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
-                        <p class="card-text">Customer ID</p>
-                        <p class="card-text">Customer Name</p>
-                        <p class="card-text">Requested Credit: {req.debit}</p>
-                        <button  class="btn btn-outline-primary" onClick={()=>{
-        completerequest(req._id)}}>Request Complete</button>
-                    </div>
-                </div>)
-                })
-            }
-                               
+                                {request.length === 0 && 'All requests completed'}
+                                {request.map((req) => {
+                                    return (
+                                        <div class="card mt-4">
+                                            {/* <h5 class="card-header">Customer Name</h5> */}
+
+                                            <div class="card-body card">
+                                                <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
+                                                <p class="card-text">Customer ID</p>
+                                                <p class="card-text">Customer Name</p>
+                                                <p class="card-text">Requested Credit: {req.debit}</p>
+                                                <button class="btn btn-outline-primary" onClick={() => {
+                                                    completerequest(req._id)
+                                                }}>Request Complete</button>
+                                            </div>
+                                        </div>)
+                                })
+                                }
+
                             </div>
                         </div>
                     </div>
