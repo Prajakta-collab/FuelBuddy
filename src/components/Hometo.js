@@ -1,13 +1,17 @@
-import React, { useState ,useContext} from 'react'
+import React, { useState ,useContext, useEffect} from 'react'
 import Navbar from './Navbar'
 import creditContext from '../context/credits/creditContext'
 
 const Hometo = () => {
   const context = useContext(creditContext);
-  const { addRequest } = context;
+  const { addRequest,credit,getcredit } = context;
 
   const[req,setReq]=useState({debit:"", vehicle_no:""})
- 
+  useEffect(() => {
+    getcredit();
+}, [credit])
+
+console.log("credit read", credit)
  const onChange=(e)=>{
   setReq({...req,[e.target.name]:e.target.value})
   console.log(req)
