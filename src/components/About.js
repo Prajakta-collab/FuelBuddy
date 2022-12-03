@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div>about page  
       <div>
-      Prerna N changes
+      Prerna Narkhede changes
       </div>
     </div>
     
