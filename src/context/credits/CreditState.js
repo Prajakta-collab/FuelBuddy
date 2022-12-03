@@ -13,7 +13,8 @@ const CreditState = (props) => {
     const response = await fetch(`${host}/api/credit/fetchcredit`,{
       method:"GET",
       headers:{
-        "Content-Type":"application/json"
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
       }
     });
     const json=await response.json()
@@ -63,6 +64,7 @@ const CreditState = (props) => {
 
       headers:{
         "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
       },
       body: JSON.stringify({ debit,vehicle_no,status}),
 

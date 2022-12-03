@@ -9,9 +9,10 @@ const Hometo = () => {
   const[req,setReq]=useState({debit:"", vehicle_no:""})
   useEffect(() => {
     getcredit();
+    
+
 }, [credit])
 
-console.log("credit read", credit)
  const onChange=(e)=>{
   setReq({...req,[e.target.name]:e.target.value})
   console.log(req)
@@ -39,9 +40,9 @@ console.log("credit read", credit)
           </thead>
           <tbody>
             <tr>
-              <td>35000</td>
-              <td>15000</td>
-              <td>50000</td>
+              <td>{credit.available_credit}</td>
+              <td>{credit.utilized_credit}</td>
+              <td>{credit.allowed_credit}</td>
             </tr>
           </tbody>
         </table>

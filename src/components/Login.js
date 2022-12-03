@@ -19,6 +19,7 @@ const Login = (props) => {
 
 
      const handleSubmit=async(e)=>{
+      console.log("clicked login")
         e.preventDefault();
         const response=await fetch("http://localhost:5001/api/auth/login", {
             method: "POST",
@@ -29,30 +30,31 @@ const Login = (props) => {
       
             body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password}),
           });
-          const json= await response.json();
+          let json= await response.json();
           console.log("json when login",json)
 
 
           if(json.success){
             //save the token 
-            localStorage.setItem('token', json.authToken);
-            console.log(localStorage.getItem('token'))
+            localStorage.setItem('auth-token',json.authToken);
+            console.log("auth-token",localStorage.getItem('auth-token'))
             console.log("zal save")
-            navigate(`/home/trucko/${json.user._id}`);
+            navigate(`/home/trucko/${json.data.id}`);
             alert("Login Succesfully!")
-            props.showAlert("Logged in Successfully !","success");
+            // props.showAlert("Logged in Successfully !","success");
             setcredentials({phone1:"",password:""})
             
 
         }
         else{
-           props.showAlert("Invaid Credentials","error")
+          //  props.showAlert("Invaid Credentials","error")
            setcredentials({phone1:"",password:""})
         }
        
       };
 
   const [value, setValue] = useState("Pump Owner");
+
   const handleSelect = (e) => {
     console.log("jdj")
 console.log(e);
