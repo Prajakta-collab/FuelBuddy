@@ -7,12 +7,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 const Login = (props) => {
 
-  const [credentials, setcredentials] = useState({email:"",password:""})
+  const [credentials, setcredentials] = useState({phone1:"",password:""})
   let navigate=useNavigate()
   const handleChange=(e)=>{
     console.log(e.target.name)
       setcredentials({...credentials,[e.target.name]:e.target.value})
-      console.log(credentials.email);
+      console.log(credentials.phone1);
       console.log(credentials.password);
 
       }
@@ -27,7 +27,7 @@ const Login = (props) => {
               "Content-Type": "application/json",
             },
       
-            body: JSON.stringify({email:credentials.email ,password :credentials.password}),
+            body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password}),
           });
           const json= await response.json();
           console.log("json when login",json)
@@ -41,13 +41,13 @@ const Login = (props) => {
             navigate(`/home/trucko/${json.user._id}`);
             alert("Login Succesfully!")
             props.showAlert("Logged in Successfully !","success");
-            setcredentials({email:"",password:""})
+            setcredentials({phone1:"",password:""})
             
 
         }
         else{
            props.showAlert("Invaid Credentials","error")
-           setcredentials({email:"",password:""})
+           setcredentials({phone1:"",password:""})
         }
        
       };
@@ -90,12 +90,12 @@ console.log(value);
 
                     <div className="form-outline form-white mb-4">
                       <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
+                        type="phone1"
+                        id="phone1"
+                        name="phone1"
+                        placeholder="Phone number"
                         onChange={handleChange}
-                        value={credentials.email}
+                        value={credentials.phone1}
                         className="form-control form-control-lg"
                       />
                     </div>
