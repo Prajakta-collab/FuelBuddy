@@ -29,6 +29,36 @@ const CreditState = (props) => {
   setReq(json)
   };
 
+
+
+
+  //addcustomer getall request
+  const addCustomer = async(name,email,password,phone1,credit) => {
+
+    //add request api call
+    let response = await fetch(`${host}/api/auth/createuser`,{
+      method: "POST",
+
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({name,email,password,phone1,credit}),
+
+    });
+    
+    const json = await response.json()
+    
+  }
+
+
+//end addcust
+
+
+
+
+
+
+
   const completerequest = async (id) => {
     //edit request here
    
@@ -66,7 +96,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest}}>
+    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,addCustomer}}>
     {props.children}
   </creditContext.Provider>
   )
