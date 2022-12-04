@@ -12,7 +12,7 @@ const HomeAtt = () => {
 
 
     const context = useContext(creditContext);
-    const { request, credit, getrequest, completerequest } = context;
+    const { credit,request, getrequest, completerequest } = context;
 
 
 
@@ -116,9 +116,10 @@ const HomeAtt = () => {
                                             {/* <h5 class="card-header">Customer Name</h5> */}
 
                                             <div class="card-body card">
+                                            <p class="card-text">Transaction Id : {req.transaction_no}</p>
                                                 <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
-                                                <p class="card-text">Customer ID</p>
-                                                <p class="card-text">Customer Name</p>
+                                                <p class="card-text">Customer ID: {req.vehicle_owner}</p>
+                                                <p class="card-text">Customer Name :{}</p>
                                                 <p class="card-text">Requested Credit: {req.debit}</p>
                                                 <button class="btn btn-outline-primary" onClick={() => {
                                                     completerequest(req._id)
