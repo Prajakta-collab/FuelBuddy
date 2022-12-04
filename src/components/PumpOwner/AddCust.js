@@ -1,13 +1,29 @@
 import React,{useContext, useState} from 'react'
+import creditContext from '../../context/credits/creditContext'
 
 
 const AddCust = () => {
 
- const [cust, setCust] = useState({})
- const handleClick=()=>{
+
+//new add cust changes
+ const context = useContext(creditContext);
+  const { addCustomer } = context;
+
+ 
+
+  const[customer,setCustomer]=useState({name:"", email:"", password:"" ,phone1:"", credit:""})
+ const handleClick=(e)=>{
     //refClose.current.click();
+    e.preventDefault();
+    addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
+    setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
+    alert('Request sent successfully!')
 
  }
+
+ //end of new add cust changes
+
+
  const [toggle, setToggle] = useState(true);
 //  const ref = useRef(null)
 
@@ -20,7 +36,7 @@ const AddCust = () => {
      setOpenModal(true);
  }
 const onChange=(e)=>{
-setCust({...cust,[e.target.name]:e.target.value})
+setCustomer({...customer,[e.target.name]:e.target.value})
 }
 
     return (
@@ -93,7 +109,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               placeholder="Enter Name"
               onChange={onChange} 
              minLength={5} required
-             value={cust.name}
+             value={customer.name}
             />
           </div>
           <div className="form-group my-3">
@@ -107,7 +123,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               placeholder="Enter Email"
               onChange={onChange} 
              minLength={5} required
-             value={cust.email}
+             value={customer.email}
             />
           </div>
           <div className="form-group my-3">
@@ -121,7 +137,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               placeholder="Enter Phone number 1"
               onChange={onChange} 
              minLength={10} required
-             value={cust.phone1}
+             value={customer.phone1}
             />
           </div>
           <div className="form-group my-3">
@@ -134,7 +150,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               aria-describedby="emailHelp"
               placeholder="Enter Phone number 2"
               onChange={onChange} 
-             value={cust.phone2}
+             value={customer.phone2}
             />
           </div>
           <div className="form-group my-3">
@@ -148,7 +164,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               placeholder="Enter password"
               onChange={onChange} 
              minLength={5} required
-             value={cust.password}
+             value={customer.password}
             />
           </div>
           <div className="form-group my-2">
@@ -160,7 +176,7 @@ setCust({...cust,[e.target.name]:e.target.value})
               name="credit"
               placeholder="Enter Credit Amount in Rs"
               onChange={onChange}
-              value={cust.credit}
+              value={customer.credit}
             />
 
           </div>

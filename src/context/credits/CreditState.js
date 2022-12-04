@@ -32,13 +32,43 @@ const CreditState = (props) => {
         "Content-Type": "application/json",
        
       }
-
+  
      
     });
    const json=await response.json()
   //  console.log("get request krtana ch json",json);
   setReq(json)
   };
+
+
+
+
+  //addcustomer getall request
+  const addCustomer = async(name,email,password,phone1,credit) => {
+
+    //add request api call
+    let response = await fetch(`${host}/api/auth/createuser`,{
+      method: "POST",
+
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({name,email,password,phone1,credit}),
+
+    });
+    
+    const json = await response.json()
+    
+  }
+
+
+//end addcust
+
+
+
+
+
+
 
   const completerequest = async (id) => {
     //edit request here
@@ -78,7 +108,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,getcredit}}>
+    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
     {props.children}
   </creditContext.Provider>
   )
