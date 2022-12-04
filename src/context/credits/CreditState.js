@@ -8,7 +8,17 @@ const CreditState = (props) => {
    const [request,setReq]=useState([])
 
 
-
+  //get credit
+  const getcredit= async() =>{
+    const response = await fetch(`${host}/api/credit/fetchcredit`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json"
+      }
+    });
+    const json=await response.json()
+    setCredit(json)
+  }
 
   //get all  request
   const getrequest = async () => {
@@ -21,7 +31,7 @@ const CreditState = (props) => {
         "Content-Type": "application/json",
        
       }
-
+  
      
     });
    const json=await response.json()
@@ -96,7 +106,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,addCustomer}}>
+    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
     {props.children}
   </creditContext.Provider>
   )
