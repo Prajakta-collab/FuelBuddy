@@ -1,14 +1,67 @@
 import React,{useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import Dropdown from "react-bootstrap/Dropdown";
-const Login = () => {
+ 
+
+
+const Login = (props) => {
+
+  const [credentials, setcredentials] = useState({phone1:"",password:""})
+  let navigate=useNavigate()
+  const handleChange=(e)=>{
+    console.log(e.target.name)
+      setcredentials({...credentials,[e.target.name]:e.target.value})
+      console.log(credentials.phone1);
+      console.log(credentials.password);
+
+      }
+
+
+     const handleSubmit=async(e)=>{
+      console.log("clicked login")
+        e.preventDefault();
+        const response=await fetch("http://localhost:5001/api/auth/login", {
+            method: "POST",
+      
+            headers: {
+              "Content-Type": "application/json",
+            },
+      
+            body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password}),
+          });
+          let json= await response.json();
+          console.log("json when login",json)
+
+
+          if(json.success){
+            //save the token 
+            localStorage.setItem('auth-token',json.authToken);
+            console.log("auth-token",localStorage.getItem('auth-token'))
+            console.log("zal save")
+            navigate(`/home/trucko/${json.data.id}`);
+            alert("Login Succesfully!")
+            // props.showAlert("Logged in Successfully !","success");
+            setcredentials({phone1:"",password:""})
+            
+
+        }
+        else{
+          //  props.showAlert("Invaid Credentials","error")
+           setcredentials({phone1:"",password:""})
+        }
+       
+      };
+
   const [value, setValue] = useState("Pump Owner");
+
   const handleSelect = (e) => {
     console.log("jdj")
 console.log(e);
 setValue(e);
 console.log(value);
   }
+
   return (
     <div>
       <section className="vh-100 gradient-custom">
@@ -39,9 +92,12 @@ console.log(value);
 
                     <div className="form-outline form-white mb-4">
                       <input
-                        type="email"
-                        id="typeEmailX"
-                        placeholder="Email"
+                        type="phone1"
+                        id="phone1"
+                        name="phone1"
+                        placeholder="Phone number"
+                        onChange={handleChange}
+                        value={credentials.phone1}
                         className="form-control form-control-lg"
                       />
                     </div>
@@ -49,8 +105,11 @@ console.log(value);
                     <div className="form-outline form-white mb-4">
                       <input
                         type="password"
-                        id="typePasswordX"
+                        name="password"
+                        id="password"
                         placeholder="Password"
+                        onChange={handleChange}
+                        value={credentials.password}
                         className="form-control form-control-lg"
                       />
                     </div>
@@ -63,7 +122,7 @@ console.log(value);
 
                     <button
                       className="btn btn-outline-light btn-lg px-5"
-                      type="submit"
+                      onClick={handleSubmit}
                     >
                       Login
                     </button>
@@ -97,6 +156,6 @@ console.log(value);
       </section>
     </div>
   );
-};
 
+}
 export default Login;
