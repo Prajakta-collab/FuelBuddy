@@ -7,10 +7,9 @@ const Hometo = () => {
   const { addRequest,credit,getcredit } = context;
 
   const[req,setReq]=useState({debit:"", vehicle_no:""})
+  
   useEffect(() => {
     getcredit();
-    
-
 }, [credit])
 
  const onChange=(e)=>{
