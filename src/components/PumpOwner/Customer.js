@@ -1,37 +1,39 @@
 import React, { useState, useRef ,useContext} from 'react'
+
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
 import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
+import { useEffect } from 'react';
 
 const Customer = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
+
+    const context = useContext(creditContext);
+    const { displayCust ,customer} = context;
+    
+
     const [openModal, setOpenModal] = useState(false);
     const handleToggle = () => {
         setToggle(!toggle);
     }
-
+  
+    useEffect(() => {
+        displayCust()
+   
+    }, [])
+    
     const handleModal = () => {
         setOpenModal(true);
     }
     //new add cust changes
- const context = useContext(creditContext);
- const { addCustomer } = context;
 
 
 
- const[customer,setCustomer]=useState({name:"", email:"", password:"" ,phone1:"", credit:""})
-const handleDisplayCust=(e)=>{
-   //refClose.current.click();
-   e.preventDefault();
-   addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
-   setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
-   alert('Request sent successfully!')
 
-}
-
+ 
 //end of new add cust changes
 
     return (
@@ -88,12 +90,12 @@ const handleDisplayCust=(e)=>{
                     </nav>
 
                     <div className="container-fluid px-4">
-                        <div className="row g-2 my-2">
+                        <div className="row g-2 my-2" >
                             <div >
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">Name : Sidhant Patil</h3>
-                                        <p className="fs-5">Contact No : 8596741236</p>
+                                        <h3 className="fs-2">Name :{customer.name}</h3>
+                                        <p className="fs-5">Contact No : {customer.phone1}</p>
 
 
                                     </div>

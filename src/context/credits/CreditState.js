@@ -7,7 +7,7 @@ const CreditState = (props) => {
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
    const [request,setReq]=useState([])
    const [cust,setCust]=useState({"_id":"","name":""})
-
+   const [customer, setCustomer] = useState({})
    const getcustomer= async() =>{
     const response = await fetch(`${host}/api/auth/getallcust`,{
       method:"GET",
@@ -31,6 +31,21 @@ const CreditState = (props) => {
     });
     const json=await response.json()
     setCredit(json)
+  }
+
+
+
+   //get credit
+   const displayCust= async(id) =>{
+    const response = await fetch(`${host}/api/auth/getcust/${id}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        
+      }
+    });
+    const json=await response.json()
+    setCustomer(json)
   }
 
   //get all  request
@@ -117,7 +132,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,cust,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+    <creditContext.Provider value={{request,credit,cust,customer,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,displayCust}}>
     {props.children}
   </creditContext.Provider>
   )
