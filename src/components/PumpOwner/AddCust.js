@@ -156,7 +156,7 @@ setCustomer({...customer,[e.target.name]:e.target.value})
           <div className="form-group my-3">
             <label htmlFor="title" >Password</label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               name="password"

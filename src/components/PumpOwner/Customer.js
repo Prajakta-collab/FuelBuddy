@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef ,useContext} from 'react'
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
+import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
 
 const Customer = () => {
@@ -15,6 +16,24 @@ const Customer = () => {
     const handleModal = () => {
         setOpenModal(true);
     }
+    //new add cust changes
+ const context = useContext(creditContext);
+ const { addCustomer } = context;
+
+
+
+ const[customer,setCustomer]=useState({name:"", email:"", password:"" ,phone1:"", credit:""})
+const handleDisplayCust=(e)=>{
+   //refClose.current.click();
+   e.preventDefault();
+   addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
+   setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
+   alert('Request sent successfully!')
+
+}
+
+//end of new add cust changes
+
     return (
         <>
             <Navbar />
