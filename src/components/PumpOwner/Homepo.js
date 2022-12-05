@@ -8,11 +8,14 @@ import AddCust from './AddCust';
 
 const Homepo = () => {
     const context = useContext(creditContext);
-    const { cust, getcustomer } = context;
+    const { cust, getcustomer,custcredit,getcustCredit } = context;
 
     useEffect(() => {
         getcustomer();
-    }, [cust])
+        getcustCredit();
+    }, [cust,custcredit])
+
+
 
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
@@ -227,8 +230,8 @@ const Homepo = () => {
                                                     <tr>
                                                         <td>{item._id}</td>
                                                         <td>{item.name}</td>
-                                                        <td>0</td>
-                                                        <td>0</td>
+                                                        <td key={item._id}>{custcredit.allowed_credit}</td>
+                                                        <td key={item._id}>{custcredit.available_credit}</td>
                                                     </tr>
                                                 )
                                             })
