@@ -198,8 +198,8 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">%25</h3>
-                                        <p className="fs-5">Increase</p>
+                                        <h3 className="fs-2">1000000</h3>
+                                        <p className="fs-5">Credits</p>
                                     </div>
                                     <i className="fas fa-chart-line fs-1 third-text border rounded-full secondary-bg p-3"></i>
                                 </div>
