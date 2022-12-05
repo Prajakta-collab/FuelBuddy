@@ -8,11 +8,16 @@ import AddCust from './AddCust';
 
 const Homepo = () => {
     const context = useContext(creditContext);
-    const { cust, getcustomer } = context;
+    const { cust, getcustomer,custcredit,getcustCredit,card,getcardsdetail } = context;
 
     useEffect(() => {
         getcustomer();
-    }, [cust])
+        getcustCredit();
+        getcardsdetail();
+        console.log(card);
+    }, [cust,custcredit,card])
+
+
 
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
@@ -167,7 +172,7 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">72</h3>
+                                        <h3 className="fs-2">{card.customers}</h3>
                                         <p className="fs-5">Customers</p>
                                     </div>
                                     <i className="fas fa-gift fs-1 third-text border rounded-full secondary-bg p-3"></i>
@@ -177,7 +182,7 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">420</h3>
+                                        <h3 className="fs-2">{card.sales}</h3>
                                         <p className="fs-5">Sales</p>
                                     </div>
                                     <i
@@ -188,7 +193,7 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">10</h3>
+                                        <h3 className="fs-2">{card.vehicles}</h3>
                                         <p className="fs-5">Vehicles Filled</p>
                                     </div>
                                     <i className="fas fa-truck fs-1 third-text border rounded-full secondary-bg p-3"></i>
@@ -198,7 +203,7 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">1000000</h3>
+                                        <h3 className="fs-2">{card.credit}</h3>
                                         <p className="fs-5">Credits</p>
                                     </div>
                                     <i className="fas fa-chart-line fs-1 third-text border rounded-full secondary-bg p-3"></i>
@@ -227,8 +232,8 @@ const Homepo = () => {
                                                     <tr>
                                                         <td>{item._id}</td>
                                                         <td>{item.name}</td>
-                                                        <td>0</td>
-                                                        <td>0</td>
+                                                        <td key={item._id}>{custcredit.allowed_credit}</td>
+                                                        <td key={item._id}>{custcredit.available_credit}</td>
                                                     </tr>
                                                 )
                                             })

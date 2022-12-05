@@ -4,21 +4,46 @@ import creditContext from "./creditContext"
 const CreditState = (props) => {
     const host = "http://localhost:5001";
        
+    const [custcredit,setcustCredit]=useState({"vehicle_owner":"","available_credit":"","allowed_credit":""})
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
    const [request,setReq]=useState([])
    const [cust,setCust]=useState({"_id":"","name":""})
+   const [card,setCard]=useState({})
+
+   const getcardsdetail= async() => {
+    const response = await fetch(`${host}/api/fuel/getcarddetails`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+      }
+    });
+    console.log("api call card")
+    const json=await response.json()
+    console.log(json)
+    setCard(json)
+   }
 
    const getcustomer= async() =>{
     const response = await fetch(`${host}/api/auth/getallcust`,{
       method:"GET",
       headers:{
         "Content-Type":"application/json",
-        // 'auth-token':localStorage.getItem('auth-token')
       }
     });
     console.log("api call cust")
     const json=await response.json()
     setCust(json)
+  }
+  const getcustCredit= async() =>{
+    const response = await fetch(`${host}/api/credit/fetchcredit`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token') //problem
+      }
+    });
+    const json=await response.json()
+    setcustCredit(json)
   }
   //get credit
   const getcredit= async() =>{
@@ -120,7 +145,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,cust,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+    <creditContext.Provider value={{request,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
     {props.children}
   </creditContext.Provider>
   )
