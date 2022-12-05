@@ -8,6 +8,9 @@ const CreditState = (props) => {
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
    const [request,setReq]=useState([])
    const [cust,setCust]=useState({"_id":"","name":""})
+
+   const [customer, setCustomer] = useState({})
+
    const [card,setCard]=useState({})
 
    const getcardsdetail= async() => {
@@ -22,6 +25,7 @@ const CreditState = (props) => {
     console.log(json)
     setCard(json)
    }
+
 
    const getcustomer= async() =>{
     const response = await fetch(`${host}/api/auth/getallcust`,{
@@ -58,6 +62,21 @@ const CreditState = (props) => {
     setCredit(json)
   }
 
+
+
+   //get credit
+   const displayCust= async(id) =>{
+    const response = await fetch(`${host}/api/auth/getcust/${id}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        
+      }
+    });
+    const json=await response.json()
+    setCustomer(json)
+  }
+
   //get all  request
   const getrequest = async () => {
     //todo Api call here
@@ -77,10 +96,7 @@ const CreditState = (props) => {
   setReq(json)
   };
 
-
-
-
-  //addcustomer getall request
+ //addcustomer getall request
   const addCustomer = async(name,email,password,phone1,credit) => {
 
     //add request api call
@@ -145,7 +161,9 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+
+    <creditContext.Provider value={{request,displayCust,customer,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+
     {props.children}
   </creditContext.Provider>
   )

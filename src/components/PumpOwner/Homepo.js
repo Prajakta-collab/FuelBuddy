@@ -1,14 +1,18 @@
 import React, { useState, useRef, useContext, useEffect } from 'react'
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory,useNavigate } from "react-router-dom";
 import creditContext from '../../context/credits/creditContext';
 import "./Homepo.css"
 import AddCust from './AddCust';
 
 const Homepo = () => {
     const context = useContext(creditContext);
+
+    const { cust , getcustomer } = context;
+
     const { cust, getcustomer,custcredit,getcustCredit,card,getcardsdetail } = context;
+
 
     useEffect(() => {
         getcustomer();
@@ -29,6 +33,12 @@ const Homepo = () => {
 
     const handleModal = () => {
         setOpenModal(true);
+    }
+    let navigate=useNavigate()
+    const handleDisplayCust =(_id) => {
+        displayCust(_id)
+        navigate(`home/pumpo/cust/${_id}}`);
+
     }
     return (
         //pump owner's home page
@@ -230,7 +240,7 @@ const Homepo = () => {
                                             cust.map((item)=>{
                                                 return(
                                                     <tr>
-                                                        <td>{item._id}</td>
+                                                        <td><a href={`http://localhost:3000/home/pumpo/cust/${item._id}`}>{item._id}</a></td>
                                                         <td>{item.name}</td>
                                                         <td key={item._id}>{custcredit.allowed_credit}</td>
                                                         <td key={item._id}>{custcredit.available_credit}</td>
