@@ -12,13 +12,14 @@ const HomeAtt = () => {
 
 
     const context = useContext(creditContext);
-    const { credit,request, getrequest, completerequest } = context;
+    const { credit, request, getrequest, completerequest,cardpump,getcardpumpat } = context;
 
 
 
     useEffect(() => {
         getrequest();
-    }, [request])
+        getcardpumpat();
+    }, [request,cardpump])
 
     console.log("request get", request)
 
@@ -90,7 +91,37 @@ const HomeAtt = () => {
                             </ul>
                         </div>
                     </nav>
+                    <div className="row g-3 my-2 w-auto px-4">
+                        <div className="col-md-3">
+                            <div className="p-3 text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <h3 className="fs-2">{cardpump.total_req}</h3>
+                                    <p className="fs-5">Total Requests</p>
+                                </div>
+                                <i className="fas fa-regular fa-clipboard-list fs-1 third-text border rounded-full secondary-bg p-3"></i>
+                            </div>
+                        </div>
 
+                        <div className="col-md-3">
+                            <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <h3 className="fs-2">{cardpump.pending_req}</h3>
+                                    <p className="fs-5">Pending Requests</p>
+                                </div>
+                                <i className="fas fa-regular fa-hourglass-start fs-1 third-text border rounded-full secondary-bg p-3"></i>
+                            </div>
+                        </div>
+
+                        <div className="col-md-3">
+                            <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <h3 className="fs-2">{cardpump.completed_req}</h3>
+                                    <p className="fs-5">Completed Requests</p>
+                                </div>
+                                <i className="fas fa-regular fa-thumbs-up fs-1 third-text border rounded-full secondary-bg p-3"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div className="container-fluid px-4">
                         <div className="row g-3 my-2">
                             {/* Search Bar */}
@@ -116,10 +147,10 @@ const HomeAtt = () => {
                                             {/* <h5 class="card-header">Customer Name</h5> */}
 
                                             <div class="card-body card">
-                                            <p class="card-text">Transaction Id : {req.transaction_no}</p>
+                                                <p class="card-text">Transaction Id : {req.transaction_no}</p>
                                                 <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
                                                 <p class="card-text">Customer ID: {req.vehicle_owner}</p>
-                                                <p class="card-text">Customer Name :{}</p>
+                                                <p class="card-text">Customer Name :{ }</p>
                                                 <p class="card-text">Requested Credit: {req.debit}</p>
                                                 <button class="btn btn-outline-primary" onClick={() => {
                                                     completerequest(req._id)

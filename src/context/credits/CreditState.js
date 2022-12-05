@@ -12,7 +12,22 @@ const CreditState = (props) => {
    const [custdetails, setCustdetails] = useState({});
 
    const [card,setCard]=useState({})
+   const [cardpump,setCardpump]=useState({})
 
+    //pump att card
+    const getcardpumpat= async() => {
+      const response = await fetch(`${host}/api/fuel/getreqdata`,{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json",
+        }
+      });
+      console.log("api call pump att card")
+      const json=await response.json()
+      console.log(json)
+      setCardpump(json)
+     }
+   //card detail pump owner
    const getcardsdetail= async() => {
     const response = await fetch(`${host}/api/fuel/getcarddetails`,{
       method:"GET",
@@ -163,7 +178,8 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,getcustdetails,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+
 
     {props.children}
   </creditContext.Provider>
