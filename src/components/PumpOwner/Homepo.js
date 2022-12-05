@@ -1,28 +1,28 @@
 import React, { useState, useRef, useContext, useEffect } from 'react'
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
-import { Link, useLocation, useHistory,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import creditContext from '../../context/credits/creditContext';
 import "./Homepo.css"
-import AddCust from './AddCust';
+
 
 const Homepo = () => {
     const context = useContext(creditContext);
 
-    const { cust , getcustomer } = context;
+   
 
-    const { cust, getcustomer,custcredit,getcustCredit,card,getcardsdetail } = context;
+    const { cust,getcustdetails,getcustomer,card,getcardsdetail } = context;
 
 
     useEffect(() => {
         getcustomer();
-        getcustCredit();
+       
         getcardsdetail();
-        console.log(card);
-    }, [cust,custcredit,card])
+      
+    }, [])
 
 
-
+    console.log("customers",cust)
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
@@ -35,11 +35,11 @@ const Homepo = () => {
         setOpenModal(true);
     }
     let navigate=useNavigate()
-    const handleDisplayCust =(_id) => {
-        displayCust(_id)
-        navigate(`home/pumpo/cust/${_id}}`);
+    // const handleDisplayCust =(_id) => {
+       
+    //     navigate(`home/pumpo/cust/${_id}}`);
 
-    }
+    // }
     return (
         //pump owner's home page
         //     <div>
@@ -239,11 +239,14 @@ const Homepo = () => {
                                             cust.length >0 &&
                                             cust.map((item)=>{
                                                 return(
-                                                    <tr>
-                                                        <td><a href={`http://localhost:3000/home/pumpo/cust/${item._id}`}>{item._id}</a></td>
-                                                        <td>{item.name}</td>
-                                                        <td key={item._id}>{custcredit.allowed_credit}</td>
-                                                        <td key={item._id}>{custcredit.available_credit}</td>
+                                                    <tr onClick={() => {
+                                                        getcustdetails(item.vehicle_owner._id);
+                                                        navigate(`/home/pumpo/cust/${item.vehicle_owner._id}}`)
+                                                    }}>
+                                                        <td>{item.vehicle_owner._id}</td>
+                                                        <td>{item.vehicle_owner.name}</td>
+                                                        <td key={item._id}>{item.allowed_credit}</td>
+                                                        <td key={item._id}>{item.available_credit}</td>
                                                     </tr>
                                                 )
                                             })

@@ -26,7 +26,7 @@ function App() {
         <CreditState>
           <BrowserRouter>
           <Routes>
-            <Route path="/home/pumpo" element={<Homepo />} />
+            <Route path="/home/pumpo/:id" element={<Homepo />} />
 
             <Route path="/home/trucko/:id" element={<Hometo />} />
             {/* <Route path="/home/trucko/:id/truck/:id" element={<Truck/>}/> */}

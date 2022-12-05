@@ -12,7 +12,7 @@ const Customer = () => {
 
 
     const context = useContext(creditContext);
-    const { displayCust ,customer} = context;
+    const { custdetails} = context;
     
 
     const [openModal, setOpenModal] = useState(false);
@@ -20,10 +20,7 @@ const Customer = () => {
         setToggle(!toggle);
     }
   
-    useEffect(() => {
-        displayCust()
    
-    }, [])
     
     const handleModal = () => {
         setOpenModal(true);
@@ -94,8 +91,9 @@ const Customer = () => {
                             <div >
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">Name :{customer.name}</h3>
-                                        <p className="fs-5">Contact No : {customer.phone1}</p>
+                                        <h3 className="fs-2">Name : {custdetails.name}</h3>
+                                        <p className="fs-5">Contact No : {custdetails.phone1}</p>
+                                        <p className="fs-5">Email : {custdetails.email}</p>
 
 
                                     </div>
