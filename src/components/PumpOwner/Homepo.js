@@ -1,13 +1,19 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
 import { Link, useLocation, useHistory } from "react-router-dom";
-
-
-
+import creditContext from '../../context/credits/creditContext';
 import "./Homepo.css"
 import AddCust from './AddCust';
+
 const Homepo = () => {
+    const context = useContext(creditContext);
+    const { cust, getcustomer } = context;
+
+    useEffect(() => {
+        getcustomer();
+    }, [cust])
+
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
@@ -192,8 +198,8 @@ const Homepo = () => {
                             <div className="col-md-3">
                                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">%25</h3>
-                                        <p className="fs-5">Increase</p>
+                                        <h3 className="fs-2">1000000</h3>
+                                        <p className="fs-5">Credits</p>
                                     </div>
                                     <i className="fas fa-chart-line fs-1 third-text border rounded-full secondary-bg p-3"></i>
                                 </div>
@@ -206,7 +212,7 @@ const Homepo = () => {
                                 <table className="table bg-white rounded shadow-sm  table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col" width="50">#</th>
+                                            {/* <th scope="col" width="50">#</th> */}
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Total Credit</th>
@@ -214,93 +220,19 @@ const Homepo = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-
-                                            <th scope="row">1</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">10</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">11</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">12</th>
-                                            <td>32uoej1</td>
-                                            <td>Jonny</td>
-                                            <td>1,00,000</td>
-                                            <td>12,000</td>
-                                        </tr>
+                                        {
+                                            cust.length >0 &&
+                                            cust.map((item)=>{
+                                                return(
+                                                    <tr>
+                                                        <td>{item._id}</td>
+                                                        <td>{item.name}</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                             </div>

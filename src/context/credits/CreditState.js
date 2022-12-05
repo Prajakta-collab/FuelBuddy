@@ -6,8 +6,20 @@ const CreditState = (props) => {
        
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
    const [request,setReq]=useState([])
+   const [cust,setCust]=useState({"_id":"","name":""})
 
-
+   const getcustomer= async() =>{
+    const response = await fetch(`${host}/api/auth/getallcust`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        // 'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    console.log("api call cust")
+    const json=await response.json()
+    setCust(json)
+  }
   //get credit
   const getcredit= async() =>{
     const response = await fetch(`${host}/api/credit/fetchcredit`,{
@@ -64,29 +76,7 @@ const CreditState = (props) => {
 
 
 
-//new  cust click changes
 
-  //get each getCustInfo
-  const getCustInfo = async (id,name,email,phone1,date) => {
-    //todo Api call here
-   
-    const response = await fetch(`${host}/api/auth/getcust/${id}`, {
-      method: "GET",
-
-      headers: {
-        "Content-Type": "application/json",
-        'auth-token':localStorage.getItem('auth-token')
-      }
-  
-     
-    });
-   const json=await response.json()
-  //  console.log("get request krtana ch json",json);
-  setReq(json)
-  };
-
-
-//end of new  cust click changes
 
 
   const completerequest = async (id) => {
@@ -127,7 +117,7 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,getrequest,completerequest,addRequest,addCustomer,getcredit,getCustInfo}}>
+    <creditContext.Provider value={{request,credit,cust,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
     {props.children}
   </creditContext.Provider>
   )
