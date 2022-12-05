@@ -1,19 +1,30 @@
 import React,{useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
-import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
  
 
 
-const Login = (props) => {
+const Login = () => {
 
-  const [credentials, setcredentials] = useState({phone1:"",password:""})
+  const [credentials, setcredentials] = useState({phone1:"",password:"",userType:""});
+  const [userType, setUserType] = useState();
+
+
   let navigate=useNavigate()
+
+  const handleSelect = (e) => {
+  console.log("e",e);
+  setUserType(e);
+  }
+
   const handleChange=(e)=>{
     console.log(e.target.name)
       setcredentials({...credentials,[e.target.name]:e.target.value})
       console.log(credentials.phone1);
       console.log(credentials.password);
+      console.log(credentials.userType);
 
       }
 
@@ -28,13 +39,13 @@ const Login = (props) => {
               "Content-Type": "application/json",
             },
       
-            body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password}),
+            body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password,userType:userType}),
           });
           let json= await response.json();
           console.log("json when login",json)
 
 
-          if(json.success){
+          if(json.success && json.data.userType==='v_owner'){
             //save the token 
             localStorage.setItem('auth-token',json.authToken);
             console.log("auth-token",localStorage.getItem('auth-token'))
@@ -42,25 +53,50 @@ const Login = (props) => {
             navigate(`/home/trucko/${json.data.id}`);
             alert("Login Succesfully!")
             // props.showAlert("Logged in Successfully !","success");
-            setcredentials({phone1:"",password:""})
+            setcredentials({phone1:"",password:"",userType:""});
+            setUserType("");
             
 
         }
+        
+        else if(json.success && json.data.userType==='p_owner'){
+          //save the token 
+          localStorage.setItem('auth-token',json.authToken);
+          console.log("auth-token",localStorage.getItem('auth-token'))
+          console.log("zal save")
+          navigate(`/home/pumpo/${json.data.id}`);
+          alert("Login Succesfully!")
+          // props.showAlert("Logged in Successfully !","success");
+          setcredentials({phone1:"",password:"",userType:""});
+          setUserType("");
+          
+
+      }
+      
+      else if(json.success && json.data.userType==='attendant'){
+        //save the token 
+        localStorage.setItem('auth-token',json.authToken);
+        console.log("auth-token",localStorage.getItem('auth-token'))
+        console.log("zal save")
+        navigate(`/home/pumpattendant/${json.data.id}`);
+        alert("Login Succesfully!")
+        // props.showAlert("Logged in Successfully !","success");
+        setcredentials({phone1:"",password:"",userType:""});
+        setUserType("");
+        
+
+    }
+
         else{
           //  props.showAlert("Invaid Credentials","error")
-           setcredentials({phone1:"",password:""})
+           setcredentials({phone1:"",password:"",userType:""});
+           setUserType("");
         }
        
       };
 
-  const [value, setValue] = useState("Pump Owner");
 
-  const handleSelect = (e) => {
-    console.log("jdj")
-console.log(e);
-setValue(e);
-console.log(value);
-  }
+ 
 
   return (
     <div>
@@ -72,22 +108,21 @@ console.log(value);
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="text-white-50 mb-5">
-                      Please enter your login and password!
-                    </p>
+                   
 
                     <div class="dropdown form-outline  mb-4">
                       
-                      <Dropdown onSelect={(e)=>{console.log(e)}}>
-                        <Dropdown.Toggle variant="primary" >
-                          Select User Type
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item value="pumpo">Pump Owner</Dropdown.Item>
-                          <Dropdown.Item value="trucko">Truck Owner</Dropdown.Item>
-                          <Dropdown.Item value="attendent">Attendant</Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                    <DropdownButton
+      alignRight
+      title={(userType==="")?"Select UserType":(userType)}
+      id="dropdown-menu-align-right"
+      onSelect={handleSelect}
+        >
+              <Dropdown.Item eventKey="p_owner">Pump Owner</Dropdown.Item>
+              <Dropdown.Item eventKey="attendant">Attendant</Dropdown.Item>
+              <Dropdown.Item eventKey="v_owner">Vehicle Owner</Dropdown.Item>
+            
+      </DropdownButton>
                     </div>
 
                     <div className="form-outline form-white mb-4">

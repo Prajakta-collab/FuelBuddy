@@ -1,20 +1,38 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef ,useContext} from 'react'
+
 import Navbar from '../Navbar'
 import CountUp from 'react-countup';
+import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
+import { useEffect } from 'react';
 
 const Customer = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
+
+    const context = useContext(creditContext);
+    const { custdetails} = context;
+    
+
     const [openModal, setOpenModal] = useState(false);
     const handleToggle = () => {
         setToggle(!toggle);
     }
-
+  
+   
+    
     const handleModal = () => {
         setOpenModal(true);
     }
+    //new add cust changes
+
+
+
+
+ 
+//end of new add cust changes
+
     return (
         <>
             <Navbar />
@@ -69,12 +87,13 @@ const Customer = () => {
                     </nav>
 
                     <div className="container-fluid px-4">
-                        <div className="row g-2 my-2">
+                        <div className="row g-2 my-2" >
                             <div >
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">Name : Sidhant Patil</h3>
-                                        <p className="fs-5">Contact No : 8596741236</p>
+                                        <h3 className="fs-2">Name : {custdetails.name}</h3>
+                                        <p className="fs-5">Contact No : {custdetails.phone1}</p>
+                                        <p className="fs-5">Email : {custdetails.email}</p>
 
 
                                     </div>

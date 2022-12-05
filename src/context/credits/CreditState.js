@@ -8,6 +8,9 @@ const CreditState = (props) => {
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
    const [request,setReq]=useState([])
    const [cust,setCust]=useState({"_id":"","name":""})
+
+   const [custdetails, setCustdetails] = useState({});
+
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
 
@@ -38,8 +41,9 @@ const CreditState = (props) => {
     setCard(json)
    }
 
+
    const getcustomer= async() =>{
-    const response = await fetch(`${host}/api/auth/getallcust`,{
+    const response = await fetch(`${host}/api/credit/fetchallcredits`,{
       method:"GET",
       headers:{
         "Content-Type":"application/json",
@@ -48,6 +52,7 @@ const CreditState = (props) => {
     console.log("api call cust")
     const json=await response.json()
     setCust(json)
+
   }
   const getcustCredit= async() =>{
     const response = await fetch(`${host}/api/credit/fetchcredit`,{
@@ -73,6 +78,21 @@ const CreditState = (props) => {
     setCredit(json)
   }
 
+
+
+   //get credit
+   const getcustdetails= async(id) =>{
+    const response = await fetch(`${host}/api/auth/getcust/${id}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        
+      }
+    });
+    const json=await response.json()
+    setCustdetails(json)
+  }
+
   //get all  request
   const getrequest = async () => {
     //todo Api call here
@@ -92,10 +112,7 @@ const CreditState = (props) => {
   setReq(json)
   };
 
-
-
-
-  //addcustomer getall request
+ //addcustomer getall request
   const addCustomer = async(name,email,password,phone1,credit) => {
 
     //add request api call
@@ -160,7 +177,10 @@ const CreditState = (props) => {
 
   
   return (
-    <creditContext.Provider value={{request,credit,cust,custcredit,card,cardpump,getcardpumpat,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+
+    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+
+
     {props.children}
   </creditContext.Provider>
   )
