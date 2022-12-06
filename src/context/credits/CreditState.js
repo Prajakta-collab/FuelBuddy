@@ -20,6 +20,8 @@ const CreditState = (props) => {
         method:"GET",
         headers:{
           "Content-Type":"application/json",
+          'auth-token':localStorage.getItem('auth-token')
+
         }
       });
       console.log("api call pump att card")
@@ -33,6 +35,8 @@ const CreditState = (props) => {
       method:"GET",
       headers:{
         "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
       }
     });
     console.log("api call card")
@@ -47,6 +51,8 @@ const CreditState = (props) => {
       method:"GET",
       headers:{
         "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
       }
     });
     console.log("api call cust")
@@ -86,6 +92,8 @@ const CreditState = (props) => {
       method:"GET",
       headers:{
         "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
         
       }
     });
@@ -102,6 +110,8 @@ const CreditState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
        
       }
   
@@ -121,6 +131,8 @@ const CreditState = (props) => {
 
       headers:{
         "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
       },
       body: JSON.stringify({name,email,password,phone1,credit}),
 
@@ -147,6 +159,8 @@ const CreditState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
       }
      
     });

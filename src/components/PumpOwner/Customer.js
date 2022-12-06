@@ -1,10 +1,10 @@
-import React, { useState, useRef ,useContext} from 'react'
+import React, { useState, useRef ,useContext,useEffect} from 'react'
 
 import Navbar from '../Navbar'
-import CountUp from 'react-countup';
+
 import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { useEffect } from 'react';
+
 
 const Customer = () => {
     const [toggle, setToggle] = useState(true);
