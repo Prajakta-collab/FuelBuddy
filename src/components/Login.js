@@ -1,102 +1,88 @@
-import React,{useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
- 
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import Alert from "./Alert";
 
+const Login = (props) => {
+  const [credentials, setcredentials] = useState({
+    phone1: "",
+    password: "",
+    userType: "",
+  });
+  const [userType, setUserType] = useState("");
 
-const Login = () => {
-
-  const [credentials, setcredentials] = useState({phone1:"",password:"",userType:""});
-  const [userType, setUserType] = useState();
-
-
-  let navigate=useNavigate()
+  let navigate = useNavigate();
 
   const handleSelect = (e) => {
-  console.log("e",e);
-  setUserType(e);
-  }
+    setUserType(e);
+  };
 
-  const handleChange=(e)=>{
-    console.log(e.target.name)
-      setcredentials({...credentials,[e.target.name]:e.target.value})
-      console.log(credentials.phone1);
-      console.log(credentials.password);
-      console.log(credentials.userType);
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    setcredentials({ ...credentials, [e.target.name]: e.target.value });
+    console.log(credentials.phone1);
+    console.log(credentials.password);
+    console.log(credentials.userType);
+  };
 
-      }
+  const handleSubmit = async (e) => {
+    console.log("clicked login");
+    e.preventDefault();
+    const response = await fetch("http://localhost:5001/api/auth/login", {
+      method: "POST",
 
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-     const handleSubmit=async(e)=>{
-      console.log("clicked login")
-        e.preventDefault();
-        const response=await fetch("http://localhost:5001/api/auth/login", {
-            method: "POST",
-      
-            headers: {
-              "Content-Type": "application/json",
-            },
-      
-            body: JSON.stringify({phone1:credentials.phone1 ,password :credentials.password,userType:userType}),
-          });
-          let json= await response.json();
-          console.log("json when login",json)
+      body: JSON.stringify({
+        phone1: credentials.phone1,
+        password: credentials.password,
+        userType: userType,
+      }),
+    });
+    let json = await response.json();
+    console.log("json when login", json);
 
+    if (json.success && json.data.userType === "v_owner") {
+      //save the token
+      localStorage.setItem("auth-token", json.authToken);
+      console.log("auth-token", localStorage.getItem("auth-token"));
+      console.log("zal save");
+      // props.showAlert("Logged in Successfully !","success");
 
-          if(json.success && json.data.userType==='v_owner'){
-            //save the token 
-            localStorage.setItem('auth-token',json.authToken);
-            console.log("auth-token",localStorage.getItem('auth-token'))
-            console.log("zal save")
-            navigate(`/home/trucko/${json.data.id}`);
-            alert("Login Succesfully!")
-            // props.showAlert("Logged in Successfully !","success");
-            setcredentials({phone1:"",password:"",userType:""});
-            setUserType("");
-            
-
-        }
-        
-        else if(json.success && json.data.userType==='p_owner'){
-          //save the token 
-          localStorage.setItem('auth-token',json.authToken);
-          console.log("auth-token",localStorage.getItem('auth-token'))
-          console.log("zal save")
-          navigate(`/home/pumpo/${json.data.id}`);
-          alert("Login Succesfully!")
-          // props.showAlert("Logged in Successfully !","success");
-          setcredentials({phone1:"",password:"",userType:""});
-          setUserType("");
-          
-
-      }
-      
-      else if(json.success && json.data.userType==='attendant'){
-        //save the token 
-        localStorage.setItem('auth-token',json.authToken);
-        console.log("auth-token",localStorage.getItem('auth-token'))
-        console.log("zal save")
-        navigate(`/home/pumpattendant/${json.data.id}`);
-        alert("Login Succesfully!")
-        // props.showAlert("Logged in Successfully !","success");
-        setcredentials({phone1:"",password:"",userType:""});
-        setUserType("");
-        
-
+      navigate(`/home/trucko/${json.data.id}`);
+      alert("Login Succesfully!");
+      setcredentials({ phone1: "", password: "", userType: "" });
+      setUserType("");
+    } else if (json.success && json.data.userType === "p_owner") {
+      //save the token
+      localStorage.setItem("auth-token", json.authToken);
+      console.log("auth-token", localStorage.getItem("auth-token"));
+      console.log("zal save");
+      navigate(`/home/pumpo/${json.data.id}`);
+      alert("Login Succesfully!");
+      // props.showAlert("Logged in Successfully !","success");
+      setcredentials({ phone1: "", password: "", userType: "" });
+      setUserType("");
+    } else if (json.success && json.data.userType === "attendant") {
+      //save the token
+      localStorage.setItem("auth-token", json.authToken);
+      console.log("auth-token", localStorage.getItem("auth-token"));
+      console.log("zal save");
+      navigate(`/home/pumpattendant/${json.data.id}`);
+      alert("Login Succesfully!");
+      // props.showAlert("Logged in Successfully !","success");
+      setcredentials({ phone1: "", password: "", userType: "" });
+      setUserType("");
+    } else {
+      // props.showAlert("Invaid Credentials","error")
+      setcredentials({ phone1: "", password: "", userType: "" });
+      setUserType("");
     }
-
-        else{
-          //  props.showAlert("Invaid Credentials","error")
-           setcredentials({phone1:"",password:"",userType:""});
-           setUserType("");
-        }
-       
-      };
-
-
- 
+  };
 
   return (
     <div>
@@ -108,21 +94,24 @@ const Login = () => {
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                   
 
                     <div class="dropdown form-outline  mb-4">
-                      
-                    <DropdownButton
-      alignRight
-      title={(userType==="")?"Select UserType":(userType)}
-      id="dropdown-menu-align-right"
-      onSelect={handleSelect}
-        >
-              <Dropdown.Item eventKey="p_owner">Pump Owner</Dropdown.Item>
-              <Dropdown.Item eventKey="attendant">Attendant</Dropdown.Item>
-              <Dropdown.Item eventKey="v_owner">Vehicle Owner</Dropdown.Item>
-            
-      </DropdownButton>
+                      <DropdownButton
+                        alignRight
+                        title={userType === "" ? "Select UserType" : userType}
+                        id="dropdown-menu-align-right"
+                        onSelect={handleSelect}
+                      >
+                        <Dropdown.Item eventKey="p_owner">
+                          Pump Owner
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="attendant">
+                          Attendant
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="v_owner">
+                          Vehicle Owner
+                        </Dropdown.Item>
+                      </DropdownButton>
                     </div>
 
                     <div className="form-outline form-white mb-4">
@@ -191,6 +180,5 @@ const Login = () => {
       </section>
     </div>
   );
-
-}
+};
 export default Login;

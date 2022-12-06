@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Navbar from '../Navbar'
-import CountUp from 'react-countup';
+
 import { Link, useLocation, useHistory } from "react-router-dom";
 
 
