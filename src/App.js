@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
+import Transactions from "./components/PumpOwner/Transactions";
 import About from './components/About';
 import Customer from "./components/PumpOwner/Customer";
 import HomeAtt from "./components/Attendant/HomeAtt";
@@ -31,7 +31,7 @@ function App() {
             <Route path="/home/trucko/:id" element={<Hometo />} />
             {/* <Route path="/home/trucko/:id/truck/:id" element={<Truck/>}/> */}
             <Route path="/home/pumpo/cust/:id" element={<Customer />} />
-
+            <Route path="/home/pumpo/transactions" element={<Transactions />}></Route>
             <Route path="/home/pumpattendant/:id" element={<HomeAtt />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
