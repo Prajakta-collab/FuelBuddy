@@ -99,6 +99,7 @@ const CreditState = (props) => {
     });
     const json=await response.json()
     setCustdetails(json)
+    console.log("after setting custdetails",custdetails)
   }
 
   //get all  request
