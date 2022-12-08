@@ -20,7 +20,7 @@ const Customer = () => {
     }, [])
 
 
-    const { custdetails} = context;
+    
     console.log("custdetails",custdetails)
     
 

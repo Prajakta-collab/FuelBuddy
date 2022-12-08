@@ -1,31 +1,6 @@
 import React, { useState, useRef, useContext, useEffect} from 'react'
 import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext';
-import { Link, useLocation, useHistory } from "react-router-dom";
-
-
-
-
-// //Transactions details
-// const Transaction = () => {
-// const context = useContext(creditContext);
-// const { Transaction } = context;
-
-
-
-// const[customer,getTransaction]=useState({Transaction Id:"", :"", password:"" ,phone1:"", credit:""})
-// const handleClick=(e)=>{
-//   //refClose.current.click();
-//   e.preventDefault();
-//   addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
-//   setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
-//   alert('Request sent successfully!')
-
-// }
-
-// //end of Transactions details
-
-// }
 
 
 const Transaction = () => {
@@ -141,13 +116,14 @@ const Transaction = () => {
                                             alltr.map((item) => {
                                                 return(
                                                     <tr>
-                                                    <td>{item.transaction_no}</td>
-                                                    <td>az</td>
-                                                    <td>{item.vehicle_no}</td>
-                                                    <td>{item.credit}</td>
-                                                    <td>{item.debit}</td>
-                                                    <td>{item.amount_due}</td>
-                                                    <td>{item.status}</td>
+                                                    <td>{item?.transaction_no}</td>
+                                                    <td>{item?.vehicle_owner?.name}</td>
+                                                    <td>{item?.vehicle_no}</td>
+                                                    <td>{item?.credit}</td>
+                                                    <td>{item?.debit}</td>
+                                                    <td>{item?.amount_due}</td>
+                                                    <td className={item.status==='delivered'?"table-success":"table-danger"}>{item.status==='delivered'?'Delivered':'Pending'}</td>
+
                                                 </tr> 
                                                 );
                                             })
