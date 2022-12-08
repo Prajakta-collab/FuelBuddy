@@ -1,4 +1,4 @@
-import React, { useState, useRef ,useContext,useEffect} from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 
 import Navbar from '../Navbar'
 
@@ -12,16 +12,20 @@ const Customer = () => {
 
 
     const context = useContext(creditContext);
-    const { custdetails} = context;
-    
+    const { custdetails, getcusttr, custtr } = context;
+
+    useEffect(() => {
+        getcusttr();
+    }, [])
+
 
     const [openModal, setOpenModal] = useState(false);
     const handleToggle = () => {
         setToggle(!toggle);
     }
-  
-   
-    
+
+
+
     const handleModal = () => {
         setOpenModal(true);
     }
@@ -30,8 +34,8 @@ const Customer = () => {
 
 
 
- 
-//end of new add cust changes
+
+    //end of new add cust changes
 
     return (
         <>
@@ -105,37 +109,35 @@ const Customer = () => {
                         </div>
 
                         <div className="row my-5">
-                            <h3 className="fs-4 mb-3">Credit</h3>
+                            <h3 className="fs-4 mb-3">Transaction</h3>
                             <div className="col">
                                 <table className="table bg-white rounded shadow-sm  table-hover">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Transaction No.</th>
+                                            <th scope="col">Transaction Date</th>
+                                            <th scope="col">Vehicle No.</th>
+                                            <th scope="col">Debit</th>
+                                            <th scope="col">Remaining Credit</th>
                                             <th scope="col">Total Credit</th>
-                                            <th scope="col">Available Credit</th>
-                                            <th scope="col">Utilised Credit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
+                                        {
+                                            custtr.length > 0 &&
+                                            custtr.map((item) => {
+                                                return (
+                                                    <tr>
+                                                        <td>{item.transaction_no}</td>
+                                                        <td>{item.tr_date}</td>
+                                                        <td>{item.vehicle_no}</td>
+                                                        <td>{item.debit}</td>
+                                                        <td>{item.amount_due}</td>
+                                                        <td>{item.credit}</td>                                                        
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                             </div>

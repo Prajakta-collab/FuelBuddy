@@ -13,7 +13,34 @@ const CreditState = (props) => {
   const [alltr,setAlltr]=useState({})
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
+   const[allatt,setAllatt]=useState([])
+   const[custtr,setCusttr]=useState([])
 
+   //get all trans for one cust: pump owner
+   const getcusttr= async(id) =>{
+    const response = await fetch(`${host}/api/fuel/getalltr/${id}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setCusttr(json)
+  }
+
+   //get all pump attendants: pump owner
+   const getallatt= async() =>{
+    const response = await fetch(`${host}/api/auth/getallatt`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setAllatt(json)
+  }
    //all transaction:pump owner
    const getalltr= async() =>{
     const response = await fetch(`${host}/api/fuel/getalltransactions`,{
@@ -194,7 +221,7 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,alltr,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
 
 
     {props.children}
