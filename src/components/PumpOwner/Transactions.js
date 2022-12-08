@@ -1,31 +1,15 @@
+
 import React, { useState, useRef, useContext, useEffect} from 'react'
+
 import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
+import PoSidebar from '../Sidebar/PoSidebar';
+import creditContext from '../../context/credits/creditContext';
 
 
 
 
-// //Transactions details
-// const Transaction = () => {
-// const context = useContext(creditContext);
-// const { Transaction } = context;
-
-
-
-// const[customer,getTransaction]=useState({Transaction Id:"", :"", password:"" ,phone1:"", credit:""})
-// const handleClick=(e)=>{
-//   //refClose.current.click();
-//   e.preventDefault();
-//   addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
-//   setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
-//   alert('Request sent successfully!')
-
-// }
-
-// //end of Transactions details
-
-// }
 
 
 const Transaction = () => {
@@ -36,13 +20,16 @@ const Transaction = () => {
         getalltr();
     }, []);
 
-    const [toggle, setToggle] = useState(true);
-    const ref = useRef(null)
 
+
+
+const Transaction = () => {
+  const context = useContext(creditContext);
+
+    const ref = useRef(null)
+    const {handleToggle,toggle}=context;
     const [openModal, setOpenModal] = useState(false);
-    const handleToggle = () => {
-        setToggle(!toggle);
-    }
+
 
     const handleModal = () => {
         setOpenModal(true);
@@ -51,7 +38,7 @@ const Transaction = () => {
         <>
             <Navbar />
             <div className="d-flex" id="wrapper">
-                {toggle && <div style={{ backgroundColor: "#3282B8" }} >
+                {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} >
                     <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                         className="fas fa-user-secret me-2"></i>FuelBuddy</div>
                     <div className="list-group list-group-flush my-3">
@@ -68,7 +55,8 @@ const Transaction = () => {
                         <a href="/" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                             className="fas fa-power-off me-2"></i>Logout</a>
                     </div>
-                </div>}
+                </div>} */}
+                <PoSidebar/>
 
                 <div id="page-content-wrapper">
                     <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">

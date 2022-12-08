@@ -41,6 +41,7 @@ function App() {
             {/* <Route path="/home/pumpo/:id/customersdetail" element={<Customercard />} /> */}
             <Route path="/home/pumpo/:id/pumpat" element={<PumpAttendant />}></Route>
             <Route path="/home/pumpo/:id/addcust" element={<AddCust/>}></Route>
+            <Route path="/home/trucko/:id/transactions" element={<Transactions />} />
           </Routes>
         </BrowserRouter>
     

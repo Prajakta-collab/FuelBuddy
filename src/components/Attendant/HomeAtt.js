@@ -3,16 +3,17 @@ import Navbar from '../Navbar'
 import CountUp from 'react-countup';
 import { Link, useLocation, useHistory } from "react-router-dom";
 import creditContext from '../../context/credits/creditContext';
+import AttSidebar from '../Sidebar/AttSidebar';
 
 const HomeAtt = () => {
-    const [toggle, setToggle] = useState(true);
+  
     const ref = useRef(null)
     // const [req, setReq] = useState()
 
 
 
     const context = useContext(creditContext);
-    const { credit, request, getrequest, completerequest,cardpump,getcardpumpat } = context;
+    const { credit, request, getrequest, completerequest,cardpump,getcardpumpat ,toggle,handleToggle} = context;
 
 
 
@@ -24,9 +25,7 @@ const HomeAtt = () => {
     console.log("request get", request)
 
     const [openModal, setOpenModal] = useState(false);
-    const handleToggle = () => {
-        setToggle(!toggle);
-    }
+  
 
     const handleModal = () => {
         setOpenModal(true);
@@ -44,7 +43,7 @@ const HomeAtt = () => {
 
 
             <div className="d-flex" id="wrapper">
-                {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
+                {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
                     <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                         className="fas fa-user-secret me-2"></i>FuelBuddy</div>
                     <div className="list-group list-group-flush my-3">
@@ -61,7 +60,8 @@ const HomeAtt = () => {
                         <a href="/" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                             className="fas fa-power-off me-2"></i>Logout</a>
                     </div>
-                </div>}
+                </div>} */}
+                <AttSidebar/>
 
                 <div id="page-content-wrapper">
                     <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -92,6 +92,7 @@ const HomeAtt = () => {
                             </ul>
                         </div>
                     </nav>
+
                     <div className="row g-3 my-2 w-auto px-4">
                         <div className="col-md-3">
                             <div className="p-3 text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
@@ -148,11 +149,11 @@ const HomeAtt = () => {
                                             {/* <h5 class="card-header">Customer Name</h5> */}
 
                                             <div class="card-body card">
-                                                <p class="card-text">Transaction Id : {req.transaction_no}</p>
-                                                <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
-                                                <p class="card-text">Customer ID: {req.vehicle_owner._id}</p>
-                                                <p class="card-text">Customer Name :{req.vehicle_owner.name}</p>
-                                                <p class="card-text">Requested Credit: {req.debit}</p>
+                                                <p class="card-text">Transaction Id : {req?.transaction_no}</p>
+                                                <h5 class="card-title">Vehicle Number: {req?.vehicle_no}</h5>
+                                                <p class="card-text">Customer ID: {req?.vehicle_owner?._id}</p>
+                                                <p class="card-text">Customer Name :{req?.vehicle_owner?.name}</p>
+                                                <p class="card-text">Requested Credit: {req?.debit}</p>
                                                 <button class="btn btn-outline-primary" onClick={() => {
                                                     completerequest(req._id)
                                                 }}>Request Complete</button>
