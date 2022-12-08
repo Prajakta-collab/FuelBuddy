@@ -4,6 +4,7 @@ import creditContext from '../../context/credits/creditContext';
 
 const AttSidebar = () => {
     const context = useContext(creditContext);
+    
     const params = useParams();
     let navigate = useNavigate();
    
@@ -11,14 +12,14 @@ const AttSidebar = () => {
     const {toggle}=context;
 
   
+    const handleLogout=(e)=>{
+      e.preventDefault();
+      localStorage.removeItem('auth-token');
+      navigate('/login');
+      //props.showAlert("Logged out successfully","success");
+      alert("Logged out successfully");
+  }
     
-      const handleLogout=(e)=>{
-        e.preventDefault();
-        localStorage.removeItem('auth-token');
-        navigate('/login');
-        //props.showAlert("Logged out successfully","success");
-        alert("Logged out successfully");
-    }
 
     const handleAbout=(e)=>{
         e.preventDefault();
