@@ -237,7 +237,7 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,,handleToggle,toggle}}>
+    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
     {props.children}
   </creditContext.Provider>

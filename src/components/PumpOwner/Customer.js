@@ -14,24 +14,20 @@ const Customer = () => {
 
     const context = useContext(creditContext);
 
-    const { custdetails, getcusttr, custtr } = context;
+    const { custdetails, getcusttr, custtr ,handleToggle,toggle} = context;
 
     useEffect(() => {
         getcusttr();
     }, [])
 
 
-    const { custdetails} = context;
+    
     console.log("custdetails",custdetails)
-    const {handleToggle,toggle}=context;
-
+  
 
     const [openModal, setOpenModal] = useState(false);
 
-    const handleToggle = () => {
-        setToggle(!toggle);
-    }
-
+    
 
 
 

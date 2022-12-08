@@ -5,29 +5,23 @@ import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
 import PoSidebar from '../Sidebar/PoSidebar';
-import creditContext from '../../context/credits/creditContext';
 
 
 
-
-
-
-const Transaction = () => {
-    const context = useContext(creditContext);
-    const{alltr,getalltr}=context;
-
-    useEffect(()=>{
-        getalltr();
-    }, []);
 
 
 
 
 const Transaction = () => {
   const context = useContext(creditContext);
+  const {handleToggle,toggle,alltr,getalltr}=context;
+
+   
+    useEffect(()=>{
+        getalltr();
+    }, []);
 
     const ref = useRef(null)
-    const {handleToggle,toggle}=context;
     const [openModal, setOpenModal] = useState(false);
 
 
@@ -129,13 +123,14 @@ const Transaction = () => {
                                             alltr.map((item) => {
                                                 return(
                                                     <tr>
-                                                    <td>{item.transaction_no}</td>
-                                                    <td>az</td>
-                                                    <td>{item.vehicle_no}</td>
-                                                    <td>{item.credit}</td>
-                                                    <td>{item.debit}</td>
-                                                    <td>{item.amount_due}</td>
-                                                    <td>{item.status}</td>
+                                                    <td>{item?.transaction_no}</td>
+                                                    <td>{item?.vehicle_owner?.name}</td>
+                                                    <td>{item?.vehicle_no}</td>
+                                                    <td>{item?.credit}</td>
+                                                    <td>{item?.debit}</td>
+                                                    <td>{item?.amount_due}</td>
+                                                    <td className={item.status==='delivered'?"table-success":"table-danger"}>{item.status==='delivered'?'Delivered':'Pending'}</td>
+
                                                 </tr> 
                                                 );
                                             })
@@ -151,6 +146,6 @@ const Transaction = () => {
             </div>
         </>
     )
-}
 
+}
 export default Transaction

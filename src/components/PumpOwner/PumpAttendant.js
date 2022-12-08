@@ -1,5 +1,5 @@
 
-import React, { useState, useRef,useContext } from 'react'
+import React, { useState, useRef,useContext, useEffect} from 'react'
 import { Link, useLocation, useHistory } from "react-router-dom";
 import PoSidebar from '../Sidebar/PoSidebar';
 
@@ -9,11 +9,10 @@ const PumpAttendant = () => {
     const context = useContext(creditContext);
     const ref = useRef(null)
 
-    const {handleToggle}=context;
+    const {handleToggle,allatt, getallatt }=context;
 
 
-    const context = useContext(creditContext);
-    const { allatt, getallatt } = context;
+   
     useEffect(() => {
         getallatt();
     }, [])

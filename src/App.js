@@ -31,6 +31,8 @@ function App() {
             
 
             <Route path="/home/trucko/:id" element={<Hometo />} />
+            <Route path="/home/trucko/:id/transactions" element={<Transactions />} />
+
             {/* <Route path="/home/trucko/:id/truck/:id" element={<Truck/>}/> */}
             <Route path="/home/pumpo/:id/cust/:id" element={<Customer />} />
             <Route path="/home/pumpo/:id/transactions" element={<Transactions />}></Route>
