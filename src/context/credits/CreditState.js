@@ -10,9 +10,20 @@ const CreditState = (props) => {
    const [cust,setCust]=useState({"_id":"","name":""})
 
    const [custdetails, setCustdetails] = useState({});
+   const [toggle, setToggle] = useState(true);
 
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
+
+   const handleToggle = () => {
+  
+    console.log(toggle);
+    setToggle(!toggle);
+    
+  };
+
+
+
 
     //pump att card
     const getcardpumpat= async() => {
@@ -193,7 +204,7 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
+    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
 
     {props.children}
