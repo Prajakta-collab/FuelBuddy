@@ -1,9 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import { Link, useLocation, useHistory } from "react-router-dom";
+import creditContext from '../../context/credits/creditContext';
 
 const PumpAttendant = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
+
+    const context = useContext(creditContext);
+    const { allatt, getallatt } = context;
+    useEffect(() => {
+        getallatt();
+    }, [])
 
     const [openModal, setOpenModal] = useState(false);
     const handleToggle = () => {
@@ -66,8 +73,8 @@ const PumpAttendant = () => {
                     </div>
                 </nav>
                 <div class="btnat text-center">
-                <button type="button" class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
-                <button type="button" class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                    <button type="button" class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
+                    <button type="button" class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                 </div>
                 <div className="row my-5">
                     <div className="col">
@@ -83,103 +90,21 @@ const PumpAttendant = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>a1</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>a2</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Evening</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>a7</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>a11</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>a8</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Evening</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>a6</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Evening</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>a3</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">8</th>
-                                    <td>a10</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Evening</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">9</th>
-                                    <td>a20</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">10</th>
-                                    <td>a12</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">11</th>
-                                    <td>a16</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Evening</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">12</th>
-                                    <td>a21</td>
-                                    <td>Jonny</td>
-                                    <td>89346728</td>
-                                    <td>Morning</td>
-                                    <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                </tr>
+                                {
+                                    allatt.length > 0 &&
+                                    allatt.map((item) => {
+                                        return (
+                                            <tr>
+                                                <td>1</td>
+                                                <td>{item._id}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.phone1}</td>
+                                                <td>morning</td>
+                                                <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>

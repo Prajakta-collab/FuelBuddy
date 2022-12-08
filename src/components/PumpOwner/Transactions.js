@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext, useEffect} from 'react'
 import Navbar from '../Navbar'
-
+import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
 
 
@@ -28,15 +28,14 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 // }
 
 
-
-
-
-
-
-
-
-
 const Transaction = () => {
+    const context = useContext(creditContext);
+    const{alltr,getalltr}=context;
+
+    useEffect(()=>{
+        getalltr();
+    }, []);
+
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
@@ -85,48 +84,46 @@ const Transaction = () => {
                         </button>
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            
+
                         </div>
                     </nav>
 
                     <div className="container-fluid px-4">
-                        
+
 
                         <div className="row my-5">
                             <h3 className="fs-4 mb-3">Transactions</h3>
                             <div className="col">
-                            <div>
+                                <div class="d-flex">
 
-                            <select>
-                       
-                              <option value="Daliy">Daliy</option>
-                       
-                              <option value="Last 7 days">Last 7 days</option>
-                       
-                              <option value="Last  1 Month">Last 1 Month</option>
-                              <option value="YTD">YTD</option>
-                       
-                            </select>
-                    
-                            <div className="row g-3 my-2">
-                            {/* Search Bar */}
-                            <div className="input-group">
-                            
-                                <div className="form-outline" >
-                                    <input type="search" placeholder="Search Bar" id="form1" className="form-control" />
+                                    <div className="row g-3 my-2">
+                                        {/* Search Bar */}
+                                        <div className="input-group">
+
+                                            <div className="form-outline" >
+                                                <input type="search" placeholder="Search Bar" id="form1" className="form-control" />
+                                            </div>
+                                            <button type="button" className="btn btn-primary">
+                                                <i className="fas fa-search"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                    <div class="m-auto">
+                                        <select>
+
+                                            <option value="Daliy">Daliy</option>
+
+                                            <option value="Last 7 days">Last 7 days</option>
+
+                                            <option value="Last  1 Month">Last 1 Month</option>
+                                            <option value="YTD">YTD</option>
+
+                                        </select>
+                                    </div>
+
                                 </div>
-                                <button type="button" className="btn btn-primary">
-                                    <i className="fas fa-search"></i>
-                                </button>
-                            
-                            </div>
-
-
-                        </div>
-
-
-                          </div>
-                                <table className="table bg-white rounded shadow-sm  table-hover">
+                                <table className="table bg-white rounded shadow-sm  table-hover mt-4">
                                     <thead>
                                         <tr>
                                             <th scope="col">Transaction ID</th>
@@ -139,42 +136,23 @@ const Transaction = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Samruddhi</td>
-                                            <td>MH14BX32</td>
-                                            <td>2000</td>
-                                            <td>500</td>
-                                            <td>1500</td>
-                                            <td>Delivered</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Prerna</td>
-                                            <td>MH19BA08</td>
-                                            <td>2500</td>
-                                            <td>1000</td>
-                                            <td>1500</td>
-                                            <td>Pending</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>John</td>
-                                            <td>MH20AB20</td>
-                                            <td>3000</td>
-                                            <td>3000</td>
-                                            <td>0</td>
-                                            <td>Pending</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Sam</td>
-                                            <td>MH50KA23</td>
-                                            <td>1000</td>
-                                            <td>300</td>
-                                            <td>700</td>
-                                            <td>Delivered</td>
-                                        </tr>
+                                        {
+                                            alltr.length>0 &&
+                                            alltr.map((item) => {
+                                                return(
+                                                    <tr>
+                                                    <td>{item.transaction_no}</td>
+                                                    <td>az</td>
+                                                    <td>{item.vehicle_no}</td>
+                                                    <td>{item.credit}</td>
+                                                    <td>{item.debit}</td>
+                                                    <td>{item.amount_due}</td>
+                                                    <td>{item.status}</td>
+                                                </tr> 
+                                                );
+                                            })
+                                        }
+                                        
                                     </tbody>
                                 </table>
                             </div>
