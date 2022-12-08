@@ -18,20 +18,23 @@ const CreditState = (props) => {
 
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
-   const[allatt,setAllatt]=useState([])
-   const[custtr,setCusttr]=useState([])
+   const[allatt,setAllatt]=useState({})
+   const[custtr,setCusttr]=useState({"transaction_no":"","tr_date":"","vehicle_no":"","debit":""})
 
    //get all trans for one cust: pump owner
    const getcusttr= async(id) =>{
+    console.log("api params",id)
     const response = await fetch(`${host}/api/fuel/getalltr/${id}`,{
       method:"GET",
       headers:{
         "Content-Type":"application/json",
-        'auth-token':localStorage.getItem('auth-token')
+        'auth-token':localStorage.getItem('auth-token')        
       }
     });
     const json=await response.json()
+    console.log("api call",json)
     setCusttr(json)
+    console.log("after setting custtrans",custtr)
   }
 
 
@@ -130,7 +133,7 @@ const CreditState = (props) => {
 
 
 
-   //get credit
+   //get 1 customer detail
    const getcustdetails= async(id) =>{
     const response = await fetch(`${host}/api/auth/getcust/${id}`,{
       method:"GET",
