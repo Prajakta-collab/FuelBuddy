@@ -2,18 +2,160 @@ import React, { useState, useRef,useContext } from 'react'
 import { Link, useLocation, useHistory } from "react-router-dom";
 import PoSidebar from '../Sidebar/PoSidebar';
 import creditContext from '../../context/credits/creditContext';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const PumpAttendant = () => {
     const context = useContext(creditContext);
     const ref = useRef(null)
+    // Delete Button on click  
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    // Add Button on click 
+    const [showadd, setShowAdd] = useState(false);
+
+    const handleCloseAdd = () => setShowAdd(false);
+    const handleShowAdd = () => setShowAdd(true);
+  
+ // Update Button on click 
+ const [showUpdate, setShowUpdate] = useState(false);
+
+ const handleCloseUpdate = () => setShowUpdate(false);
+ const handleShowUpdate = () => setShowUpdate(true);
+
+
+
+
     const {handleToggle,toggle}=context;
     const [openModal, setOpenModal] = useState(false);
   
+   const deleteAttendant = () => {
+    <div
+    className="modal show"
+    style={{ display: 'block', position: 'initial' }}>
+    <Modal.Dialog>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal title</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        <p>Modal body text goes here.</p>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button variant="secondary">Close</Button>
+        <Button variant="primary">Save changes</Button>
+      </Modal.Footer>
+    </Modal.Dialog>
+  </div>
+   }
+
 
     const handleModal = () => {
         setOpenModal(true);
     }
     return (
+        <>
+        
+  {/* Delete Button Modal */}
+
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
+  
+  {/* Add Button Modal */}
+
+ 
+
+      <Modal show={show} onHide={handleCloseAdd}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Example textarea</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAdd}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseAdd}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+  {/* Update Button Modal */}
+
+      <Button variant="primary" onClick={handleShowUpdate}>
+        Launch demo modal
+      </Button>
+
+      <Modal show={show} onHide={handleCloseUpdate}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Example textarea</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
         <div className="d-flex" id="wrapper">
             {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
                 <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
@@ -68,8 +210,8 @@ const PumpAttendant = () => {
                     </div>
                 </nav>
                 <div class="btnat text-center">
-                <button type="button" class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
-                <button type="button" class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                <button type="button"  onClick={handleShowAdd} class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
+                <button type="button" onClick={handleShow} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                 </div>
                 <div className="row my-5">
                     <div className="col">
@@ -188,6 +330,7 @@ const PumpAttendant = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
