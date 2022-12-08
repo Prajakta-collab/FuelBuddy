@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext, useEffect } from 'react'
-
+import { useParams } from "react-router-dom";
 import Navbar from '../Navbar'
 
 import creditContext from '../../context/credits/creditContext';
@@ -10,19 +10,19 @@ const Customer = () => {
     const [toggle, setToggle] = useState(true);
     const ref = useRef(null)
 
-
+    const params = useParams();
+    console.log("params",params.id)
+    const idd=params.id.substring(0,24);
+    console.log("params after",idd);
     const context = useContext(creditContext);
 
     const { custdetails, getcusttr, custtr } = context;
 
     useEffect(() => {
-        getcusttr();
+        getcusttr(idd);
     }, [])
-
-
-    const { custdetails} = context;
-    console.log("custdetails",custdetails)
-    
+    console.log("custdetails", custdetails)
+    console.log("custtr",custtr)
 
 
     const [openModal, setOpenModal] = useState(false);
@@ -104,12 +104,8 @@ const Customer = () => {
                                         <h3 className="fs-2">Name : {custdetails?.user?.name}</h3>
                                         <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
                                         <p className="fs-5">Email : {custdetails?.user?.email}</p>
-                                        <p className="fs-5">Remained Credit : {custdetails?.liveCredit?.available_credit}</p>
+                                        <p className="fs-5">Remaining Credit : {custdetails?.liveCredit?.available_credit}</p>
                                         <p className="fs-5">Total Allowed Credit : {custdetails?.liveCredit?.allowed_credit}</p>
-
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +124,8 @@ const Customer = () => {
                                             <th scope="col">Transaction Date</th>
                                             <th scope="col">Vehicle No.</th>
                                             <th scope="col">Debit</th>
-                                            <th scope="col">Remaining Credit</th>
-                                            <th scope="col">Total Credit</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Delivered Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,16 +134,16 @@ const Customer = () => {
                                             custtr.map((item) => {
                                                 return (
                                                     <tr>
-                                                        <td>{item.transaction_no}</td>
-                                                        <td>{item.tr_date}</td>
-                                                        <td>{item.vehicle_no}</td>
-                                                        <td>{item.debit}</td>
-                                                        <td>{item.amount_due}</td>
-                                                        <td>{item.credit}</td>                                                        
+                                                        <td key={item._id}>{item?.transaction_no}</td>
+                                                        <td key={item._id}>{item?.tr_date.substring(0,10)}</td>
+                                                        <td key={item._id}>{item?.vehicle_no}</td>
+                                                        <td key={item._id}>{item?.debit}</td>
+                                                        <td key={item._id}>{item?.status}</td>
+                                                        <td key={item._id}>{item?.delivered_date.substring(0,10)}</td>                                                      
                                                     </tr>
                                                 )
                                             })
-                                        }
+                                        }                                    
                                     </tbody>
                                 </table>
                             </div>
