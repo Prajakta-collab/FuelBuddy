@@ -5,12 +5,18 @@ import { useNavigate,useParams } from "react-router-dom";
 import creditContext from "../../context/credits/creditContext";
 import "./Homepo.css";
 
+
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import PoSidebar from "../Sidebar/PoSidebar";
+
 const Homepo = () => {
   const context = useContext(creditContext);
   let navigate = useNavigate();
 
 
-  const { cust, getcustdetails, getcustomer, card, getcardsdetail } = context;
+  const { cust, getcustdetails, getcustomer, card, getcardsdetail,handleToggle } = context;
 
   useEffect(() => {
     getcustomer();
@@ -21,13 +27,26 @@ const Homepo = () => {
 
 
   console.log("customers", cust);
-  const [toggle, setToggle] = useState(true);
+ 
   const ref = useRef(null);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+
   const [openModal, setOpenModal] = useState(false);
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
+
+
+  const handleShow=(e)=>{
+    e.preventDefault();
+   
+    navigate(`/home/pumpo/${params.id}/addcust`);
+
+ }
+
+
+
 
   const handlePumpatt=(e)=>{
     e.preventDefault();
@@ -145,9 +164,9 @@ const handleCust=(e)=>{
       {/* <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button> */}
-
+     
       <div className="d-flex" id="wrapper">
-        {toggle && (
+        {/* {toggle && (
           <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
             <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
               <i className="fas fa-user-secret me-2"></i>FuelBuddy
@@ -193,8 +212,8 @@ const handleCust=(e)=>{
               </a>
             </div>
           </div>
-        )}
-
+        )} */}
+<PoSidebar/>
 
         <div id="page-content-wrapper">
           <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -340,9 +359,10 @@ const handleCust=(e)=>{
               </div>
             </div>
             <div className="d-flex justify-content-end ">
-              <button type="button" class="mb-3 btn btn-primary btn-lg">
+              <button type="button" class="mb-3 btn btn-primary btn-lg" onClick={handleShow}>
                 Add
               </button>
+              
             </div>
           </div>
         </div>

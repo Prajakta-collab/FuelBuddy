@@ -1,28 +1,32 @@
-import React, { useState, useRef, useContext, useEffect } from 'react'
+
+import React, { useState, useRef,useContext, useEffect} from 'react'
 import { Link, useLocation, useHistory } from "react-router-dom";
+import PoSidebar from '../Sidebar/PoSidebar';
+
 import creditContext from '../../context/credits/creditContext';
 
 const PumpAttendant = () => {
-    const [toggle, setToggle] = useState(true);
+    const context = useContext(creditContext);
     const ref = useRef(null)
 
-    const context = useContext(creditContext);
-    const { allatt, getallatt } = context;
+    const {handleToggle,allatt, getallatt }=context;
+
+
+   
     useEffect(() => {
         getallatt();
     }, [])
 
+
     const [openModal, setOpenModal] = useState(false);
-    const handleToggle = () => {
-        setToggle(!toggle);
-    }
+  
 
     const handleModal = () => {
         setOpenModal(true);
     }
     return (
         <div className="d-flex" id="wrapper">
-            {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
+            {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
                 <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     className="fas fa-user-secret me-2"></i>FuelBuddy</div>
                 <div className="list-group list-group-flush my-3">
@@ -41,7 +45,9 @@ const PumpAttendant = () => {
                     <a href="/" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         className="fas fa-power-off me-2"></i>Logout</a>
                 </div>
-            </div>}
+            </div>} */}
+
+            <PoSidebar/>
 
             <div id="page-content-wrapper">
                 <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">

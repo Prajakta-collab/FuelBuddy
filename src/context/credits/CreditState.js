@@ -10,7 +10,12 @@ const CreditState = (props) => {
    const [cust,setCust]=useState({"_id":"","name":""})
 
    const [custdetails, setCustdetails] = useState({});
+
+   const [toggle, setToggle] = useState(true);
+
+
   const [alltr,setAlltr]=useState({})
+
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
    const[allatt,setAllatt]=useState({})
@@ -31,6 +36,15 @@ const CreditState = (props) => {
     setCusttr(json)
     console.log("after setting custtrans",custtr)
   }
+
+
+   const handleToggle = () => {
+  
+    console.log(toggle);
+    setToggle(!toggle);
+    
+  };
+
 
    //get all pump attendants: pump owner
    const getallatt= async() =>{
@@ -56,6 +70,7 @@ const CreditState = (props) => {
     const json=await response.json()
     setAlltr(json)
   }
+
     //pump att card
     const getcardpumpat= async() => {
       const response = await fetch(`${host}/api/fuel/getreqdata`,{
@@ -225,8 +240,7 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit}}>
-
+    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
     {props.children}
   </creditContext.Provider>
