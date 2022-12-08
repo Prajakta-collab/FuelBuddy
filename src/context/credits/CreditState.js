@@ -26,6 +26,7 @@ const CreditState = (props) => {
       }
     });
     const json=await response.json()
+    console.log(json)
     setCusttr(json)
   }
 
