@@ -10,10 +10,30 @@ const CreditState = (props) => {
    const [cust,setCust]=useState({"_id":"","name":""})
 
    const [custdetails, setCustdetails] = useState({});
+
    const [toggle, setToggle] = useState(true);
+
+
+  const [alltr,setAlltr]=useState({})
 
    const [card,setCard]=useState({})
    const [cardpump,setCardpump]=useState({})
+   const[allatt,setAllatt]=useState([])
+   const[custtr,setCusttr]=useState([])
+
+   //get all trans for one cust: pump owner
+   const getcusttr= async(id) =>{
+    const response = await fetch(`${host}/api/fuel/getalltr/${id}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setCusttr(json)
+  }
+
 
    const handleToggle = () => {
   
@@ -23,7 +43,30 @@ const CreditState = (props) => {
   };
 
 
-
+   //get all pump attendants: pump owner
+   const getallatt= async() =>{
+    const response = await fetch(`${host}/api/auth/getallatt`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setAllatt(json)
+  }
+   //all transaction:pump owner
+   const getalltr= async() =>{
+    const response = await fetch(`${host}/api/fuel/getalltransactions`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setAlltr(json)
+  }
 
     //pump att card
     const getcardpumpat= async() => {
@@ -71,17 +114,7 @@ const CreditState = (props) => {
     setCust(json)
 
   }
-  const getcustCredit= async() =>{
-    const response = await fetch(`${host}/api/credit/fetchcredit`,{
-      method:"GET",
-      headers:{
-        "Content-Type":"application/json",
-        'auth-token':localStorage.getItem('auth-token') //problem
-      }
-    });
-    const json=await response.json()
-    setcustCredit(json)
-  }
+  
   //get credit
   const getcredit= async() =>{
     const response = await fetch(`${host}/api/credit/fetchcredit`,{
@@ -204,8 +237,7 @@ const CreditState = (props) => {
   
   return (
 
-    <creditContext.Provider value={{request,custdetails,getcustdetails,cardpump,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustCredit,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
-
+    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,,handleToggle,toggle}}>
 
     {props.children}
   </creditContext.Provider>
