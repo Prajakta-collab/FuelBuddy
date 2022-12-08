@@ -150,8 +150,8 @@ const HomeAtt = () => {
                                             <div class="card-body card">
                                                 <p class="card-text">Transaction Id : {req.transaction_no}</p>
                                                 <h5 class="card-title">Vehicle Number: {req.vehicle_no}</h5>
-                                                <p class="card-text">Customer ID: {req.vehicle_owner}</p>
-                                                <p class="card-text">Customer Name :{ }</p>
+                                                <p class="card-text">Customer ID: {req.vehicle_owner._id}</p>
+                                                <p class="card-text">Customer Name :{req.vehicle_owner.name}</p>
                                                 <p class="card-text">Requested Credit: {req.debit}</p>
                                                 <button class="btn btn-outline-primary" onClick={() => {
                                                     completerequest(req._id)

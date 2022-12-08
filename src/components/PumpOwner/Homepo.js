@@ -173,20 +173,20 @@ const handleCust=(e)=>{
                 Attendant
               </a>
               <a onClick={handleTr}
-                href="/"
+                href=""
                 className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
               >
                 <i className="fas fa-paperclip me-2"></i>Daily Transactions
               </a>
               <a onClick={handleAbout}
-                href="/"
+                href=""
                 className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
               >
                 <i className="fas fa-chart-line me-2"></i>About
               </a>
 
               <a onClick={handleLogout}
-                href="/"
+                href=""
                 className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
               >
                 <i className="fas fa-power-off me-2"></i>Logout
@@ -194,6 +194,7 @@ const handleCust=(e)=>{
             </div>
           </div>
         )}
+
 
         <div id="page-content-wrapper">
           <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -323,14 +324,14 @@ const handleCust=(e)=>{
                             onClick={() => {
                               getcustdetails(item.vehicle_owner._id);
                               navigate(
-                                `/home/pumpo/:id/cust/${item.vehicle_owner._id}}`
+                                `/home/pumpo/${params.id}/cust/${item.vehicle_owner._id}}`
                               );
                             }}
                           >
-                            <td>{item.vehicle_owner._id}</td>
-                            <td>{item.vehicle_owner.name}</td>
-                            <td key={item._id}>{item.allowed_credit}</td>
-                            <td key={item._id}>{item.available_credit}</td>
+                            <td key={item._id}>{item?.vehicle_owner?._id}</td>
+                            <td key={item._id}>{item?.vehicle_owner?.name}</td>
+                            <td key={item._id}>{item?.allowed_credit}</td>
+                            <td key={item._id}>{item?.available_credit}</td>
                           </tr>
                         );
                       })}

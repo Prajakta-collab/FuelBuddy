@@ -12,11 +12,17 @@ const Customer = () => {
 
 
     const context = useContext(creditContext);
+
     const { custdetails, getcusttr, custtr } = context;
 
     useEffect(() => {
         getcusttr();
     }, [])
+
+
+    const { custdetails} = context;
+    console.log("custdetails",custdetails)
+    
 
 
     const [openModal, setOpenModal] = useState(false);
@@ -95,9 +101,13 @@ const Customer = () => {
                             <div >
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">Name : {custdetails.name}</h3>
-                                        <p className="fs-5">Contact No : {custdetails.phone1}</p>
-                                        <p className="fs-5">Email : {custdetails.email}</p>
+                                        <h3 className="fs-2">Name : {custdetails?.user?.name}</h3>
+                                        <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
+                                        <p className="fs-5">Email : {custdetails?.user?.email}</p>
+                                        <p className="fs-5">Remained Credit : {custdetails?.liveCredit?.available_credit}</p>
+                                        <p className="fs-5">Total Allowed Credit : {custdetails?.liveCredit?.allowed_credit}</p>
+
+
 
 
                                     </div>
