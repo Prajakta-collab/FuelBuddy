@@ -142,8 +142,8 @@ const HomeAtt = () => {
                         <div className="row my-5">
                             <h3 className="fs-4 mb-3">Pending Requests</h3>
                             <div className="col">
-                                {request.length === 0 && 'All requests completed'}
-                                {request.map((req) => {
+                                {request?.length === 0 && 'All requests completed'}
+                                {request?.map((req) => {
                                     return (
                                         <div class="card mt-4">
                                             {/* <h5 class="card-header">Customer Name</h5> */}
