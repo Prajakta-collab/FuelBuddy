@@ -1,5 +1,5 @@
-import React, { useState, useRef ,useContext,useEffect} from 'react'
-
+import React, { useState, useRef, useContext, useEffect } from 'react'
+import { useParams } from "react-router-dom";
 import Navbar from '../Navbar'
 
 import creditContext from '../../context/credits/creditContext';
@@ -11,26 +11,34 @@ const Customer = () => {
    
     const ref = useRef(null)
 
-
+    const params = useParams();
+    console.log("params",params.id)
+    const idd=params.id.substring(0,24);
+    console.log("params after",idd);
     const context = useContext(creditContext);
-    const { custdetails} = context;
-    console.log("custdetails",custdetails)
-    const {handleToggle,toggle}=context;
+
+    const { custdetails, getcusttr, custtr ,handleToggle,toggle} = context;
+
+    useEffect(() => {
+        getcusttr(idd);
+    }, [])
+
+    console.log("custdetails", custdetails)
+    console.log("custtr",custtr)
+
+
+
 
     const [openModal, setOpenModal] = useState(false);
 
-   
     
+
+
+
     const handleModal = () => {
         setOpenModal(true);
     }
-    //new add cust changes
-
-
-
-
- 
-//end of new add cust changes
+    
 
     return (
         <>
@@ -93,12 +101,8 @@ const Customer = () => {
                                         <h3 className="fs-2">Name : {custdetails?.user?.name}</h3>
                                         <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
                                         <p className="fs-5">Email : {custdetails?.user?.email}</p>
-                                        <p className="fs-5">Remained Credit : {custdetails?.liveCredit?.available_credit}</p>
+                                        <p className="fs-5">Remaining Credit : {custdetails?.liveCredit?.available_credit}</p>
                                         <p className="fs-5">Total Allowed Credit : {custdetails?.liveCredit?.allowed_credit}</p>
-
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -108,37 +112,35 @@ const Customer = () => {
                         </div>
 
                         <div className="row my-5">
-                            <h3 className="fs-4 mb-3">Credit</h3>
+                            <h3 className="fs-4 mb-3">Transaction</h3>
                             <div className="col">
                                 <table className="table bg-white rounded shadow-sm  table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Total Credit</th>
-                                            <th scope="col">Available Credit</th>
-                                            <th scope="col">Utilised Credit</th>
+                                            <th scope="col">Transaction No.</th>
+                                            <th scope="col">Transaction Date</th>
+                                            <th scope="col">Vehicle No.</th>
+                                            <th scope="col">Debit</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Delivered Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>50000</td>
-                                            <td>36000</td>
-                                            <td>14000</td>
-                                        </tr>
+                                        {
+                                            custtr.length > 0 &&
+                                            custtr.map((item) => {
+                                                return (
+                                                    <tr>
+                                                        <td key={item._id}>{item?.transaction_no}</td>
+                                                        <td key={item._id}>{item?.tr_date.substring(0,10)}</td>
+                                                        <td key={item._id}>{item?.vehicle_no}</td>
+                                                        <td key={item._id}>{item?.debit}</td>
+                                                        <td key={item._id}>{item?.status}</td>
+                                                        <td key={item._id}>{item?.delivered_date.substring(0,10)}</td>                                                      
+                                                    </tr>
+                                                )
+                                            })
+                                        }                                    
                                     </tbody>
                                 </table>
                             </div>

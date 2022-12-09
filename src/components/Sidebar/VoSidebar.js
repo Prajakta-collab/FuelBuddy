@@ -10,10 +10,7 @@ const VoSidebar = () => {
 
     const {toggle}=context;
    
-      const handlePumpatt=(e)=>{
-        e.preventDefault();
-        navigate(`/home/pumpo/${params.id}/pumpat`);
-      }
+     
     
       const handleLogout=(e)=>{
         e.preventDefault();
