@@ -100,7 +100,9 @@ const PumpAttendant = () => {
                                     allatt.length > 0 &&
                                     allatt.map((item) => {
                                         return (
-                                            <tr>
+                                            <tr className={
+                                                !item.isActive && "table-danger"
+                                              }>
                                                 <td>1</td>
                                                 <td>{item._id}</td>
                                                 <td>{item.name}</td>

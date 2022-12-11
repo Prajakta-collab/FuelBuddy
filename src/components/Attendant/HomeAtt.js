@@ -7,29 +7,31 @@ import AttSidebar from '../Sidebar/AttSidebar';
 
 const HomeAtt = () => {
   
-    const ref = useRef(null)
-    // const [req, setReq] = useState()
-
-
+    
 
     const context = useContext(creditContext);
-    const { credit, request, getrequest, completerequest,cardpump,getcardpumpat ,toggle,handleToggle} = context;
+    const { credit, searchByvno,request, getrequest, completerequest,cardpump,getcardpumpat ,toggle,handleToggle} = context;
 
-
+    const [vehicleNo,setVehicleNo]=useState("")
 
     useEffect(() => {
         getrequest();
         getcardpumpat();
-    }, [request,cardpump])
+    }, [])
 
     console.log("request get", request)
 
-    const [openModal, setOpenModal] = useState(false);
-  
-
-    const handleModal = () => {
-        setOpenModal(true);
+    const handleSearch=()=>{
+        console.log("search",vehicleNo);
+        searchByvno(vehicleNo);
     }
+    const handleChange=(e)=>{
+        setVehicleNo(e.target.value);
+    }
+
+
+
+   
     return (
 
         <div>
@@ -129,9 +131,9 @@ const HomeAtt = () => {
                             {/* Search Bar */}
                             <div className="input-group">
                                 <div className="form-outline">
-                                    <input type="search" placeholder="Search Bar" id="form1" className="form-control" />
+                                    <input onChange={handleChange} onBlur={()=>{getrequest()}} type="search" placeholder="Search Bar" id="form1" className="form-control" />
                                 </div>
-                                <button type="button" className="btn btn-primary">
+                                <button onClick={handleSearch} type="button" className="btn btn-primary">
                                     <i className="fas fa-search"></i>
                                 </button>
                             </div>
@@ -142,7 +144,7 @@ const HomeAtt = () => {
                         <div className="row my-5">
                             <h3 className="fs-4 mb-3">Pending Requests</h3>
                             <div className="col">
-                                {request?.length === 0 && 'All requests completed'}
+                                {request?.length === 0 && 'No Pending Requests'}
                                 {request?.map((req) => {
                                     return (
                                         <div class="card mt-4">
