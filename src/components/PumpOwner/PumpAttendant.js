@@ -12,10 +12,10 @@ const PumpAttendant = () => {
     const context = useContext(creditContext);
     const ref = useRef(null)
     // Delete Button on click  
-    const [show, setShow] = useState(false);
+    const [showdelete, setShowDelete] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
     // Add Button on click 
     const [showadd, setShowAdd] = useState(false);
 
@@ -44,26 +44,26 @@ const PumpAttendant = () => {
 
     const [openModal, setOpenModal] = useState(false);
   
-   const deleteAttendant = () => {
-    <div
-    className="modal show"
-    style={{ display: 'block', position: 'initial' }}>
-    <Modal.Dialog>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
-      </Modal.Header>
+  //  const deleteAttendant = () => {
+  //   <div
+  //   className="modal show"
+  //   style={{ display: 'block', position: 'initial' }}>
+  //   <Modal.Dialog>
+  //     <Modal.Header closeButton>
+  //       <Modal.Title>Modal title</Modal.Title>
+  //     </Modal.Header>
 
-      <Modal.Body>
-        <p>Modal body text goes here.</p>
-      </Modal.Body>
+  //     <Modal.Body>
+  //       <p>Modal body text goes here.</p>
+  //     </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary">Save changes</Button>
-      </Modal.Footer>
-    </Modal.Dialog>
-  </div>
-   }
+  //     <Modal.Footer>
+  //       <Button variant="secondary">Close</Button>
+  //       <Button variant="primary">Save changes</Button>
+  //     </Modal.Footer>
+  //   </Modal.Dialog>
+  // </div>
+  //  }
 
 
     const handleModal = () => {
@@ -74,17 +74,17 @@ const PumpAttendant = () => {
         
   {/* Delete Button Modal */}
 
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={showdelete} onHide={handleCloseDelete} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Delete Customer</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>Are you sure ,you want to delete the Attendant</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+          <Button variant="secondary" onClick={handleCloseDelete}>
+          Cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={handleCloseDelete}>
+            Delete
           </Button>
         </Modal.Footer>
       </Modal>
@@ -94,27 +94,42 @@ const PumpAttendant = () => {
 
  
 
-      <Modal show={show} onHide={handleCloseAdd}>
+      <Modal show={showadd} onHide={handleCloseAdd}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add Attendant</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Attendant ID</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                type="number"
+                placeholder="6391af5cd9357646b71b328c"
                 autoFocus
               />
+
+<Form.Label>Attendant Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                
+              />
+
+<Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="phone"
+                placeholder="eg. 8767987877"
+                
+              />
+
+<Form.Label>Shift</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg.Morning / Night"
+                
+              />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
+     
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -130,38 +145,53 @@ const PumpAttendant = () => {
 
   {/* Update Button Modal */}
 
-      <Button variant="primary" onClick={handleShowUpdate}>
+      {/* <Button variant="primary" onClick={handleShowUpdate}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
-      <Modal show={show} onHide={handleCloseUpdate}>
+      <Modal show={showUpdate} onHide={handleCloseUpdate}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Attendant ID</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                type="number"
+                placeholder="6391af5cd9357646b71b328c"
                 autoFocus
               />
+
+<Form.Label>Attendant Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                
+              />
+
+<Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="phone"
+                placeholder="eg. 8767987877"
+                
+              />
+
+<Form.Label>Shift</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg.Morning / Night"
+                
+              />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
+     
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseUpdate}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCloseUpdate}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -223,7 +253,7 @@ const PumpAttendant = () => {
                 </nav>
                 <div class="btnat text-center">
                 <button type="button"  onClick={handleShowAdd} class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
-                <button type="button" onClick={handleShow} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                 </div>
                 <div className="row my-5">
                     <div className="col">
@@ -249,7 +279,7 @@ const PumpAttendant = () => {
                                                 <td>{item.name}</td>
                                                 <td>{item.phone1}</td>
                                                 <td>morning</td>
-                                                <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
+                                                <td onClick={handleShowUpdate} ><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                             </tr>
                                         )
                                     })
