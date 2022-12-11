@@ -71,6 +71,18 @@ const CreditState = (props) => {
     setAlltr(json)
   }
 
+  //get own all transaction :vehicle_owner transaction page
+  const getownalltr= async() =>{
+    const response = await fetch(`${host}/api/fuel/getalltr`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setAlltr(json)
+  }
     //pump att card
     const getcardpumpat= async() => {
       const response = await fetch(`${host}/api/fuel/getreqdata`,{
@@ -296,7 +308,7 @@ const filterByDuration = async(duration) => {
 }
   return (
 
-    <creditContext.Provider value={{filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+    <creditContext.Provider value={{getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
     {props.children}
   </creditContext.Provider>

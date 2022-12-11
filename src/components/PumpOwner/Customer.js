@@ -57,9 +57,7 @@ const [showrenew, setShowRenew] = useState(false);
 const handleCloseRenew = () => setShowRenew(false);
 const handleShowRenew= () => setShowRenew(true);
 
-    const handleModal = () => {
-        setOpenModal(true);
-    }
+  
     
 
     return (
@@ -333,7 +331,7 @@ const handleShowRenew= () => setShowRenew(true);
                              
                               <button type="button"  onClick={handleShowRenew} class="btn btn-outline-success me-5 btn-lg">Payment<i class="fas fa-solid fa-user-plus ms-2"></i></button>
                               <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
-                              <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success me-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen"></i></button>
+                              <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success ms-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen ms-2"></i></button>
                               
                                 
                              
