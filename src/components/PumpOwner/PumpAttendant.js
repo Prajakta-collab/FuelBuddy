@@ -4,10 +4,34 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import PoSidebar from '../Sidebar/PoSidebar';
 
 import creditContext from '../../context/credits/creditContext';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const PumpAttendant = () => {
     const context = useContext(creditContext);
     const ref = useRef(null)
+    // Delete Button on click  
+    const [showdelete, setShowDelete] = useState(false);
+
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
+    // Add Button on click 
+    const [showadd, setShowAdd] = useState(false);
+
+    const handleCloseAdd = () => setShowAdd(false);
+    const handleShowAdd = () => setShowAdd(true);
+  
+ // Update Button on click 
+ const [showUpdate, setShowUpdate] = useState(false);
+
+ const handleCloseUpdate = () => setShowUpdate(false);
+ const handleShowUpdate = () => setShowUpdate(true);
+
+
+
+
+    
 
     const {handleToggle,allatt, getallatt }=context;
 
@@ -20,11 +44,160 @@ const PumpAttendant = () => {
 
     const [openModal, setOpenModal] = useState(false);
   
+  //  const deleteAttendant = () => {
+  //   <div
+  //   className="modal show"
+  //   style={{ display: 'block', position: 'initial' }}>
+  //   <Modal.Dialog>
+  //     <Modal.Header closeButton>
+  //       <Modal.Title>Modal title</Modal.Title>
+  //     </Modal.Header>
+
+  //     <Modal.Body>
+  //       <p>Modal body text goes here.</p>
+  //     </Modal.Body>
+
+  //     <Modal.Footer>
+  //       <Button variant="secondary">Close</Button>
+  //       <Button variant="primary">Save changes</Button>
+  //     </Modal.Footer>
+  //   </Modal.Dialog>
+  // </div>
+  //  }
+
 
     const handleModal = () => {
         setOpenModal(true);
     }
     return (
+        <>
+        
+  {/* Delete Button Modal */}
+
+      <Modal show={showdelete} onHide={handleCloseDelete} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure ,you want to delete the Attendant</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+          Cancel
+          </Button>
+          <Button variant="primary" onClick={handleCloseDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
+  
+  {/* Add Button Modal */}
+
+ 
+
+      <Modal show={showadd} onHide={handleCloseAdd}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Attendant</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Attendant ID</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="6391af5cd9357646b71b328c"
+                autoFocus
+              />
+
+<Form.Label>Attendant Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                
+              />
+
+<Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="phone"
+                placeholder="eg. 8767987877"
+                
+              />
+
+<Form.Label>Shift</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg.Morning / Night"
+                
+              />
+            </Form.Group>
+     
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAdd}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseAdd}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+  {/* Update Button Modal */}
+
+      {/* <Button variant="primary" onClick={handleShowUpdate}>
+        Launch demo modal
+      </Button> */}
+
+      <Modal show={showUpdate} onHide={handleCloseUpdate}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Attendant ID</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="6391af5cd9357646b71b328c"
+                autoFocus
+              />
+
+<Form.Label>Attendant Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                
+              />
+
+<Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="phone"
+                placeholder="eg. 8767987877"
+                
+              />
+
+<Form.Label>Shift</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg.Morning / Night"
+                
+              />
+            </Form.Group>
+     
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdate}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseUpdate}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
         <div className="d-flex" id="wrapper">
             {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} id="sidebar-wrapper">
                 <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
@@ -79,8 +252,8 @@ const PumpAttendant = () => {
                     </div>
                 </nav>
                 <div class="btnat text-center">
-                    <button type="button" class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
-                    <button type="button" class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                <button type="button"  onClick={handleShowAdd} class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
+                <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                 </div>
                 <div className="row my-5">
                     <div className="col">
@@ -108,7 +281,7 @@ const PumpAttendant = () => {
                                                 <td>{item.name}</td>
                                                 <td>{item.phone1}</td>
                                                 <td>morning</td>
-                                                <td><i class="fas fa-sharp fa-solid fa-pen"></i></td>
+                                                <td onClick={handleShowUpdate} ><i class="fas fa-sharp fa-solid fa-pen"></i></td>
                                             </tr>
                                         )
                                     })
@@ -119,6 +292,7 @@ const PumpAttendant = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

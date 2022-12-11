@@ -5,6 +5,9 @@ import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext';
 import { Link, useLocation, useHistory } from "react-router-dom";
 import PoSidebar from '../Sidebar/PoSidebar';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 
 const Customer = () => {
@@ -31,9 +34,28 @@ const Customer = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
-    
+     // Update Button on click 
+    const [showUpdate, setShowUpdate] = useState(false);
 
+    const handleCloseUpdate = () => setShowUpdate(false);
+    const handleShowUpdate = () => setShowUpdate(true);
 
+// Delete Button on click  
+const [showdelete, setShowDelete] = useState(false);
+
+const handleCloseDelete = () => setShowDelete(false);
+const handleShowDelete = () => setShowDelete(true);
+// Payment Button on click 
+const [showadd, setShowAdd] = useState(false);
+
+const handleCloseAdd = () => setShowAdd(false);
+const handleShowAdd= () => setShowAdd(true);
+
+// Add Button on click 
+const [showrenew, setShowRenew] = useState(false);
+
+const handleCloseRenew = () => setShowRenew(false);
+const handleShowRenew= () => setShowRenew(true);
 
     const handleModal = () => {
         setOpenModal(true);
@@ -42,6 +64,207 @@ const Customer = () => {
 
     return (
         <>
+
+
+          {/* Update Button Modal */}
+
+      <Modal show={showUpdate} onHide={handleCloseUpdate}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                autoFocus
+              />
+
+<Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="eg.xyz@gmail.com"
+                
+              />
+
+<Form.Label>Phone Number 1</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.8978675677"
+                
+              />
+
+<Form.Label>Phone Number 2</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.9855675578"
+                
+              />
+
+<Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder=""
+                
+              />
+
+<Form.Label>Credit</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.1200"
+                
+              />
+            </Form.Group>
+     
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdate}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseUpdate}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+       {/* Delete Button Modal */}
+
+       <Modal show={showdelete} onHide={handleCloseDelete} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Customer </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure ,you want to delete the customer</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleCloseDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
+  
+  {/* Payment  Button Modal */}
+
+ 
+
+      <Modal show={showrenew} onHide={handleCloseRenew}>
+        <Modal.Header closeButton>
+          <Modal.Title>Renew CreditS</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Credit </Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Rs.200"
+                autoFocus
+              />
+
+            <Form.Label>Particulars </Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Rs.200"
+               
+              />
+
+              
+            <Form.Label>Reference </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="MH19TU7678"
+               
+              />
+            </Form.Group>
+            
+       
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseRenew}>
+            Cancel
+          </Button>
+          <Button  variant="primary" onClick={handleShowAdd}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
+
+    {/* Add Button Modal */}
+
+ 
+
+    <Modal show={showadd} onHide={handleCloseAdd}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="eg. Ram Mishra"
+                autoFocus
+              />
+
+<Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="eg.xyz@gmail.com"
+                
+              />
+
+<Form.Label>Phone Number 1</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.8978675677"
+                
+              />
+
+<Form.Label>Phone Number 2</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.9855675578"
+                
+              />
+
+<Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder=""
+                
+              />
+
+<Form.Label>Credit</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="eg.1200"
+                
+              />
+            </Form.Group>
+     
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAdd}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleCloseAdd}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
             <Navbar />
             <div className="d-flex" id="wrapper">
                 {/* {toggle && <div style={{ backgroundColor: "#3282B8" }} >
@@ -103,6 +326,17 @@ const Customer = () => {
                                         <p className="fs-5">Email : {custdetails?.user?.email}</p>
                                         <p className="fs-5">Remaining Credit : {custdetails?.liveCredit?.available_credit}</p>
                                         <p className="fs-5">Total Allowed Credit : {custdetails?.liveCredit?.allowed_credit}</p>
+                                    
+
+                                       
+        
+                             
+                              <button type="button"  onClick={handleShowRenew} class="btn btn-outline-success me-5 btn-lg">Payment<i class="fas fa-solid fa-user-plus ms-2"></i></button>
+                              <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                              <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success me-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen"></i></button>
+                              
+                                
+                             
                                     </div>
                                 </div>
                             </div>
