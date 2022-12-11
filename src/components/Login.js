@@ -95,24 +95,7 @@ const Login = (props) => {
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
 
-                    <div class="dropdown form-outline  mb-4">
-                      <DropdownButton
-                        alignRight
-                        title={userType === "" ? "Select UserType" : userType}
-                        id="dropdown-menu-align-right"
-                        onSelect={handleSelect}
-                      >
-                        <Dropdown.Item eventKey="p_owner">
-                          Pump Owner
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="attendant">
-                          Attendant
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="v_owner">
-                          Vehicle Owner
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </div>
+                    
 
                     <div className="form-outline form-white mb-4">
                       <input
@@ -138,39 +121,41 @@ const Login = (props) => {
                       />
                     </div>
 
-                    <p className="small mb-5 pb-lg-2">
+                    <p className="small mb-3 pb-lg-2">
                       <a className="text-white-50" href="#!">
                         Forgot password?
                       </a>
                     </p>
-
+                    <div class="dropdown form-outline  mb-4">
+                      <DropdownButton
+                        alignRight
+                        title={userType === "" ? "Select UserType" : userType}
+                        id="dropdown-menu-align-right"
+                        onSelect={handleSelect}
+                      >
+                        <Dropdown.Item eventKey="p_owner">
+                          Pump Owner
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="attendant">
+                          Attendant
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="v_owner">
+                          Vehicle Owner
+                        </Dropdown.Item>
+                      </DropdownButton>
+                    </div>
                     <button
-                      className="btn btn-outline-light btn-lg px-5"
+                      className="btn btn-outline-light btn-lg px-5 mb-4"
                       onClick={handleSubmit}
                     >
                       Login
                     </button>
 
-                    <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                      <a href="/" className="text-white">
-                        <i className="fab fa-facebook-f fa-lg"></i>
-                      </a>
-                      <a href="/" className="text-white">
-                        <i className="fab fa-twitter fa-lg mx-4 px-2"></i>
-                      </a>
-                      <a href="/" className="text-white">
-                        <i className="fab fa-google fa-lg"></i>
-                      </a>
-                    </div>
+                    
                   </div>
 
                   <div>
-                    <p className="mb-0">
-                      Don't have an account?{" "}
-                      <a href="#!" className="text-white-50 fw-bold">
-                        Sign Up
-                      </a>
-                    </p>
+                    
                   </div>
                 </div>
               </div>

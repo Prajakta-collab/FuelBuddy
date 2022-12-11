@@ -235,12 +235,68 @@ const CreditState = (props) => {
     console.log("after concat request",request)
   }
 
+//search fuel req by vehilce no : Homeatt page search bar
+  const searchByvno = async(vehicle_no) => {
 
+    //add request api call
+    let response = await fetch(`${host}/api/fuel/searchreq`,{
+      method: "POST",
 
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+      body: JSON.stringify({ vehicle_no}),
+
+    });
+    
+    const json = await response.json()
+    console.log("json after call marlya nantr",json.request)
+    setReq(json.request);
+  }
+
+//search transaction by vehicle owner name : Transaction.js search bar
+const searchByName = async(name) => {
+
+  //add request api call
+  let response = await fetch(`${host}/api/fuel/searchbyname`,{
+    method: "POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      'auth-token':localStorage.getItem('auth-token')
+    },
+    body: JSON.stringify({ name}),
+
+  });
   
+  const json = await response.json()
+  console.log("json after call marlya nantr",json.request)
+  setAlltr(json);
+}
+  
+//filter all transactions by duration: daily,last7 days,last month, YTD (pumpo->Transactions.js filter)
+const filterByDuration = async(duration) => {
+
+  console.log("here")
+  let response = await fetch(`${host}/api/fuel/filteralltr`,{
+    method: "POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      'auth-token':localStorage.getItem('auth-token')
+    },
+    body: JSON.stringify({duration}),
+
+  });
+  
+  const json = await response.json()
+  console.log("filterbyduration",json)
+  setAlltr(json);
+}
   return (
 
-    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+    <creditContext.Provider value={{filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
     {props.children}
   </creditContext.Provider>
