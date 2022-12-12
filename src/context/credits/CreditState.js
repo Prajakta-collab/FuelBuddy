@@ -20,7 +20,56 @@ const CreditState = (props) => {
    const [cardpump,setCardpump]=useState({})
    const[allatt,setAllatt]=useState({})
    const[custtr,setCusttr]=useState({"transaction_no":"","tr_date":"","vehicle_no":"","debit":""})
+   const[pay,setPay]= useState({})
+   const[upcust,setUpdatecust]=useState({})
+  // const[delcust,setDeletecust]=useState({})
 
+   //delete vehicle owner
+   const deletecust = async (id) => {
+    let response = await fetch(`${host}/api/auth/deletevo/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+    });
+    const json=await response.json()
+    //setDeletecust(json)
+  };
+
+   //update vehicle owner : pump owner login required
+   const updatecust = async (id,name,email,phone1,phone2,Credit) => {
+    let response = await fetch(`${host}/api/auth/updatevo/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+      body: JSON.stringify({name,email,phone1,phone2,Credit}) 
+    });
+   const json=await response.json()
+   setUpdatecust(json)
+  };
+
+   //payment for particular customer -> update credit: pump owner login required
+   const postpay= async(id,credit,particulars,reference)=>{
+    console.log(id,credit)
+    credit=Number("credit")
+    console.log(typeof credit)
+    let response = await fetch(`${host}/api/credit/payment/${id}`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')        
+      },
+      body: JSON.stringify({credit,particulars,reference})
+      
+    });
+    const json=await response.json()
+    console.log("json doc",json)
+    setPay(json)
+   }
+ 
    //get all trans for one cust: pump owner
    const getcusttr= async(id) =>{
     console.log("api params",id)
@@ -308,7 +357,10 @@ const filterByDuration = async(duration) => {
 }
   return (
 
-    <creditContext.Provider value={{getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+
+
+    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+
 
     {props.children}
   </creditContext.Provider>
