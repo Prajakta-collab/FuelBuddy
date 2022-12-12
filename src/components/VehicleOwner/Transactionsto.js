@@ -1,10 +1,10 @@
 
-import React, { useState, useRef, useContext, useEffect} from 'react'
+import React, { useContext, useEffect} from 'react'
 
 import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext';
-import { Link, useLocation, useHistory } from "react-router-dom";
-import PoSidebar from '../Sidebar/PoSidebar';
+
+import VoSidebar from '../Sidebar/VoSidebar';
 
 
 
@@ -14,20 +14,14 @@ import PoSidebar from '../Sidebar/PoSidebar';
 
 const Transactionsto = () => {
   const context = useContext(creditContext);
-  const {handleToggle,toggle,alltr,getalltr}=context;
+  const {alltr,getownalltr,handleToggle}=context;
 
    
     useEffect(()=>{
-        getalltr();
+        getownalltr()
     }, []);
 
-    const ref = useRef(null)
-    const [openModal, setOpenModal] = useState(false);
-
-
-    const handleModal = () => {
-        setOpenModal(true);
-    }
+ 
     return (
         <>
             <Navbar />
@@ -50,7 +44,7 @@ const Transactionsto = () => {
                             className="fas fa-power-off me-2"></i>Logout</a>
                     </div>
                 </div>} */}
-                <PoSidebar/>
+                <VoSidebar/>
 
                 <div id="page-content-wrapper">
                     <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -131,7 +125,7 @@ const Transactionsto = () => {
                                                     <td>{item?.credit}</td>
                                                     <td>{item?.debit}</td>
                                                     <td>{item?.amount_due}</td>
-                                                    <td className={item.status==='delivered'?"table-success":"table-danger"}>{item.status==='delivered'?'Delivered':'Pending'}</td>
+                                                    <td className={item.status==='delivered'?"table-success":"table-danger"}>{item.status}</td>
 
                                                 </tr> 
                                                 );

@@ -177,9 +177,7 @@ const Transaction = () => {
                                   : "table-danger"
                               }
                             >
-                              {item.status === "delivered"
-                                ? "Delivered"
-                                : "Pending"}
+                             {item.status}
                             </td>
                           </tr>
                         );

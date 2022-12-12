@@ -339,7 +339,9 @@ const handleCust=(e)=>{
                     {cust.length > 0 &&
                       cust.map((item) => {
                         return (
-                          <tr
+                          <tr className={
+                            !item?.vehicle_owner?.isActive && "table-danger"
+                          }
                             onClick={() => {
                               getcustdetails(item.vehicle_owner._id);
                               navigate(
