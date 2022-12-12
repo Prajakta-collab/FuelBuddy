@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 
 const Customer = () => {
 
+
   const ref = useRef(null)
 
   const params = useParams();
@@ -89,8 +90,6 @@ const Customer = () => {
   return (
     <>
 
-
-      {/* Update Button Modal */}
 
       <Modal show={showUpdate} onHide={handleCloseUpdate}>
         <Modal.Header closeButton>
@@ -350,13 +349,109 @@ const Customer = () => {
                             className="fas fa-power-off me-2"></i>Logout</a>
                     </div>
                 </div>} */}
-        <PoSidebar />
-        <div id="page-content-wrapper">
-          <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
-            <div className="d-flex align-items-center">
-              <i className="fas fa-align-left primary-text fs-4 me-3" onClick={handleToggle} id="menu-toggle"></i>
-              <h2 className="fs-2 m-0">Dashboard</h2>
-            </div>
+
+             <PoSidebar/>
+                <div id="page-content-wrapper">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                        <div className="d-flex align-items-center">
+                            <i className="fas fa-align-left primary-text fs-4 me-3" onClick={handleToggle} id="menu-toggle"></i>
+                            <h2 className="fs-2 m-0">Dashboard</h2>
+                        </div>
+
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle second-text fw-bold" href="/" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="fas fa-user me-2"></i>John Doe
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a className="dropdown-item" href="/">Profile</a></li>
+                                        <li><a className="dropdown-item" href="/">Settings</a></li>
+                                        <li><a className="dropdown-item" href="/">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <div className="container-fluid px-4">
+                        <div className="row g-2 my-2" >
+                            <div >
+                                <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
+                                    <div>
+                                        <h3 className="fs-2">Name : {custdetails?.user?.name}</h3>
+                                        <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
+                                        <p className="fs-5">Email : {custdetails?.user?.email}</p>
+                                        <p className="fs-5">Remaining Credit : {custdetails?.liveCredit?.available_credit}</p>
+                                        <p className="fs-5">Total Allowed Credit : {custdetails?.liveCredit?.allowed_credit}</p>
+                                    
+
+                                       
+        
+                             
+                              <button type="button"  onClick={handleShowRenew} class="btn btn-outline-success me-5 btn-lg">Payment<i class="fas fa-solid fa-user-plus ms-2"></i></button>
+                              <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
+                              <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success ms-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen ms-2"></i></button>
+                              
+                                
+                             
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div className="row my-5">
+                            <h3 className="fs-4 mb-3">Transaction</h3>
+                            <div className="col">
+                                <table className="table bg-white rounded shadow-sm  table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Transaction No.</th>
+                                            <th scope="col">Transaction Date</th>
+                                            <th scope="col">Vehicle No.</th>
+                                            <th scope="col">Debit Amount</th>
+                                            <th scope="col">Credit Amount</th>
+                                            <th scope="col">Amount Due</th>
+
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Delivered Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            custtr.length > 0 &&
+                                            custtr.map((item) => {
+                                                return (
+                                                    <tr>
+                                                        <td key={item._id}>{item?.transaction_no}</td>
+                                                        <td key={item._id}>{item?.tr_date.substring(0,10)}</td>
+                                                        <td key={item._id}>{item?.vehicle_no}</td>
+                                                        <td key={item._id}>{item?.debit}</td>
+                                                        <td key={item._id}>{item?.credit}</td>
+                                                        <td key={item._id}>{item?.amount_due}</td>
+
+
+                                                        <td key={item._id}>{item?.status}</td>
+                                                        <td key={item._id}>{item?.delivered_date.substring(0,10)}</td>                                                      
+                                                    </tr>
+                                                )
+                                            })
+                                        }                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
 
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

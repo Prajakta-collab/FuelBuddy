@@ -79,6 +79,7 @@ const Login = (props) => {
       setUserType("");
     } else {
       // props.showAlert("Invaid Credentials","error")
+      alert("Phone or password is Incorrect !")
       setcredentials({ phone1: "", password: "", userType: "" });
       setUserType("");
     }
