@@ -352,7 +352,10 @@ const handleShowRenew= () => setShowRenew(true);
                                             <th scope="col">Transaction No.</th>
                                             <th scope="col">Transaction Date</th>
                                             <th scope="col">Vehicle No.</th>
-                                            <th scope="col">Debit</th>
+                                            <th scope="col">Debit Amount</th>
+                                            <th scope="col">Credit Amount</th>
+                                            <th scope="col">Amount Due</th>
+
                                             <th scope="col">Status</th>
                                             <th scope="col">Delivered Date</th>
                                         </tr>
@@ -367,6 +370,10 @@ const handleShowRenew= () => setShowRenew(true);
                                                         <td key={item._id}>{item?.tr_date.substring(0,10)}</td>
                                                         <td key={item._id}>{item?.vehicle_no}</td>
                                                         <td key={item._id}>{item?.debit}</td>
+                                                        <td key={item._id}>{item?.credit}</td>
+                                                        <td key={item._id}>{item?.amount_due}</td>
+
+
                                                         <td key={item._id}>{item?.status}</td>
                                                         <td key={item._id}>{item?.delivered_date.substring(0,10)}</td>                                                      
                                                     </tr>
