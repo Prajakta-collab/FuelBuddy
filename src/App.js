@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import {
   BrowserRouter,
   Routes,
@@ -10,15 +10,14 @@ import Customer from "./components/PumpOwner/Customer";
 import HomeAtt from "./components/Attendant/HomeAtt";
 
 import Homepo from "./components/PumpOwner/Homepo";
-import Hometo from "./components/Hometo";
+import Hometo from "./components/VehicleOwner/Hometo";
 import Login from './components/Login';
 
-import Customercard from "./components/PumpOwner/Customercard";
 import PumpAttendant from "./components/PumpOwner/PumpAttendant"
 
 import CreditState from "./context/credits/CreditState";
-import Signin from "./components/Signin";
 import AddCust from "./components/PumpOwner/AddCust";
+import Transactionsto from "./components/VehicleOwner/Transactionsto";
 function App() {
   
   return (
@@ -31,7 +30,7 @@ function App() {
             
 
             <Route path="/home/trucko/:id" element={<Hometo />} />
-            <Route path="/home/trucko/:id/transactions" element={<Transactions />} />
+            <Route path="/home/trucko/:id/transactions" element={<Transactionsto />} />
 
             {/* <Route path="/home/trucko/:id/truck/:id" element={<Truck/>}/> */}
             <Route path="/home/pumpo/:id/cust/:id" element={<Customer />} />
@@ -39,7 +38,6 @@ function App() {
             <Route path="/home/pumpattendant/:id" element={<HomeAtt />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />}/> 
-            <Route path="/signin" element={<Signin />} />
             {/* <Route path="/home/pumpo/:id/customersdetail" element={<Customercard />} /> */}
             <Route path="/home/pumpo/:id/pumpat" element={<PumpAttendant />}></Route>
             <Route path="/home/pumpo/:id/addcust" element={<AddCust/>}></Route>

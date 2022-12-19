@@ -20,7 +20,56 @@ const CreditState = (props) => {
    const [cardpump,setCardpump]=useState({})
    const[allatt,setAllatt]=useState({})
    const[custtr,setCusttr]=useState({"transaction_no":"","tr_date":"","vehicle_no":"","debit":""})
+   const[pay,setPay]= useState({})
+   const[upcust,setUpdatecust]=useState({})
+  // const[delcust,setDeletecust]=useState({})
 
+   //delete vehicle owner
+   const deletecust = async (id) => {
+    let response = await fetch(`${host}/api/auth/deletevo/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+    });
+    const json=await response.json()
+    //setDeletecust(json)
+  };
+
+   //update vehicle owner : pump owner login required
+   const updatecust = async (id,name,email,phone1,phone2,Credit) => {
+    let response = await fetch(`${host}/api/auth/updatevo/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+      body: JSON.stringify({name,email,phone1,phone2,Credit}) 
+    });
+   const json=await response.json()
+   setUpdatecust(json)
+  };
+
+   //payment for particular customer -> update credit: pump owner login required
+   const postpay= async(id,credit,particulars,reference)=>{
+    console.log(id,credit)
+    credit=Number("credit")
+    console.log(typeof credit)
+    let response = await fetch(`${host}/api/credit/payment/${id}`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')        
+      },
+      body: JSON.stringify({credit,particulars,reference})
+      
+    });
+    const json=await response.json()
+    console.log("json doc",json)
+    setPay(json)
+   }
+ 
    //get all trans for one cust: pump owner
    const getcusttr= async(id) =>{
     console.log("api params",id)
@@ -71,6 +120,18 @@ const CreditState = (props) => {
     setAlltr(json)
   }
 
+  //get own all transaction :vehicle_owner transaction page
+  const getownalltr= async() =>{
+    const response = await fetch(`${host}/api/fuel/getalltr`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      }
+    });
+    const json=await response.json()
+    setAlltr(json)
+  }
     //pump att card
     const getcardpumpat= async() => {
       const response = await fetch(`${host}/api/fuel/getreqdata`,{
@@ -235,12 +296,71 @@ const CreditState = (props) => {
     console.log("after concat request",request)
   }
 
+//search fuel req by vehilce no : Homeatt page search bar
+  const searchByvno = async(vehicle_no) => {
 
+    //add request api call
+    let response = await fetch(`${host}/api/fuel/searchreq`,{
+      method: "POST",
 
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+      },
+      body: JSON.stringify({ vehicle_no}),
+
+    });
+    
+    const json = await response.json()
+    console.log("json after call marlya nantr",json.request)
+    setReq(json.request);
+  }
+
+//search transaction by vehicle owner name : Transaction.js search bar
+const searchByName = async(name) => {
+
+  //add request api call
+  let response = await fetch(`${host}/api/fuel/searchbyname`,{
+    method: "POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      'auth-token':localStorage.getItem('auth-token')
+    },
+    body: JSON.stringify({ name}),
+
+  });
   
+  const json = await response.json()
+  console.log("json after call marlya nantr",json.request)
+  setAlltr(json);
+}
+  
+//filter all transactions by duration: daily,last7 days,last month, YTD (pumpo->Transactions.js filter)
+const filterByDuration = async(duration) => {
+
+  console.log("here")
+  let response = await fetch(`${host}/api/fuel/filteralltr`,{
+    method: "POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      'auth-token':localStorage.getItem('auth-token')
+    },
+    body: JSON.stringify({duration}),
+
+  });
+  
+  const json = await response.json()
+  console.log("filterbyduration",json)
+  setAlltr(json);
+}
   return (
 
-    <creditContext.Provider value={{request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+
+
+    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+
 
     {props.children}
   </creditContext.Provider>
