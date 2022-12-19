@@ -253,11 +253,10 @@ const PumpAttendant = () => {
                 </nav>
                 <div class="btnat text-center">
                 <button type="button"  onClick={handleShowAdd} class="btn btn-outline-success me-5 btn-lg">Add<i class="fas fa-solid fa-user-plus ms-2"></i></button>
-                <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                 </div>
                 <div className="row my-5">
                     <div className="col">
-                        <table className="table bg-white rounded shadow-sm  table-hover" width="900">
+                        <table className="table bg-white rounded shadow-sm  table-hover" width="1000">
                             <thead>
                                 <tr class="table-primary">
                                     <th scope="col" width="50">#</th>
@@ -265,7 +264,8 @@ const PumpAttendant = () => {
                                     <th scope="col">Attendant Name</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Shift</th>
-                                    <th></th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -280,6 +280,7 @@ const PumpAttendant = () => {
                                                 <td>{item.phone1}</td>
                                                 <td>morning</td>
                                                 <td onClick={handleShowUpdate} ><i class="fas fa-sharp fa-solid fa-pen"></i></td>
+                                                <td onClick={handleShowDelete} ><i class="fas fa-sharp fa-solid fa-trash ms-2"></i></td>
                                             </tr>
                                         )
                                     })
