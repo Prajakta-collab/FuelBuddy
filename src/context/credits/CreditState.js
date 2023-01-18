@@ -95,6 +95,70 @@ const CreditState = (props) => {
   };
 
 
+  const updateAtt = async(id,name,email,password,phone1) => {
+
+    //add request api call
+    console.log("id",id);
+    let response = await fetch(`${host}/api/auth/updateatt/${id}`,{
+      method: "PUT",
+  
+      headers:{
+        "Content-Type":"application/json",
+        'auth-token':localStorage.getItem('auth-token')
+  
+      },
+      body: JSON.stringify({name,email,password,phone1}),
+  
+    });
+    
+    const json = await response.json()
+    
+  }
+  
+  
+  //end updateattendant
+ //addAttendant start
+ const addAtt = async(name,email,password,phone1) => {
+
+  //add request api call
+  let response = await fetch(`${host}/api/auth/createatt`,{
+    method: "POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      'auth-token':localStorage.getItem('auth-token')
+
+    },
+    body: JSON.stringify({name,email,password,phone1}),
+
+  });
+  
+  const json = await response.json()
+  
+}
+
+
+//end addAttendant
+
+  //delete Attendant
+  const deleteAtt = async (id) => {
+    //edit request here
+   
+    let response = await fetch(`${host}/api/auth/deleteatt/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "Content-Type": "application/json",
+        'auth-token':localStorage.getItem('auth-token')
+
+      }
+     
+    });
+   const json=await response.json()
+ 
+  };
+//end of delete dcustomer
+
    //get all pump attendants: pump owner
    const getallatt= async() =>{
     const response = await fetch(`${host}/api/auth/getallatt`,{
@@ -358,8 +422,7 @@ const filterByDuration = async(duration) => {
   return (
 
 
-
-    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,deleteAtt,addAtt,updateAtt,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
 
 
     {props.children}
