@@ -10,12 +10,19 @@ import Form from 'react-bootstrap/Form';
 
 const PumpAttendant = () => {
     const context = useContext(creditContext);
-    const ref = useRef(null)
+    const {handleToggle,allatt, getallatt,deleteAtt,updateAtt ,addAtt}=context;
+
+    const [deleteid, setDeleteid] = useState("")
+
     // Delete Button on click  
     const [showdelete, setShowDelete] = useState(false);
 
     const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete = () => setShowDelete(true);
+    const handleShowDelete = (id) => {
+      
+      setDeleteid(id)
+      setShowDelete(true);}
+    console.log("set delete id",deleteid)
     // Add Button on click 
     const [showadd, setShowAdd] = useState(false);
 
@@ -24,16 +31,19 @@ const PumpAttendant = () => {
   
  // Update Button on click 
  const [showUpdate, setShowUpdate] = useState(false);
+ const [updateid, setupdateid] = useState("")
 
  const handleCloseUpdate = () => setShowUpdate(false);
- const handleShowUpdate = () => setShowUpdate(true);
+ const handleShowUpdate = (id) => {
+  
+  setupdateid(id)
+  setShowUpdate(true);}
 
 
 
 
-    
 
-    const {handleToggle,allatt, getallatt }=context;
+
 
 
    
@@ -65,10 +75,62 @@ const PumpAttendant = () => {
   // </div>
   //  }
 
+ 
+//new add cust changes
 
-    const handleModal = () => {
-        setOpenModal(true);
-    }
+
+const onChange=(e)=>{
+  setAddAttendant({...addAttendant,[e.target.name]:e.target.value})
+  
+  }
+
+  const onUpdate=(e)=>{
+    setUpdateAttendant({...updateAttendant,[e.target.name]:e.target.value})
+  }
+
+const[addAttendant,setAddAttendant]=useState({name:"", email:"", password:"" ,phone1:""})
+const handleAddAtt=(e)=>{
+  //refClose.current.click();
+  e.preventDefault();
+  addAtt(addAttendant.name,addAttendant.email,addAttendant.password,addAttendant.phone1)
+  setAddAttendant({name:"", email:"", password:"" ,phone1:""}) 
+  alert('Request sent successfully!')
+  setShowAdd(false)
+
+}
+
+//end of new add cust changes
+//new add cust changes
+
+
+const[updateAttendant,setUpdateAttendant]=useState({name:"", email:"", password:"" ,phone1:""})
+const handleUpdate=()=>{
+  //refClose.current.click();
+  
+ 
+  updateAtt(updateid,updateAttendant.name,updateAttendant.email,updateAttendant.password,updateAttendant.phone1)
+  
+  setUpdateAttendant({name:"", email:"", password:"" ,phone1:""}) 
+  alert('Request sent successfully!')
+  setShowUpdate(false)
+
+}
+
+//end of new add cust changes
+
+
+  const handleDelete=(id)=>{
+   
+    //refClose.current.click();
+    deleteAtt(id)
+    alert('Attendant Deleted successfully')
+    setShowDelete(false);
+    setDeleteid("")
+
+ }
+
+ 
+   
     return (
         <>
         
@@ -83,7 +145,7 @@ const PumpAttendant = () => {
           <Button variant="secondary" onClick={handleCloseDelete}>
           Cancel
           </Button>
-          <Button variant="primary" onClick={handleCloseDelete}>
+          <Button variant="primary" onClick={()=>handleDelete(deleteid)}>
             Delete
           </Button>
         </Modal.Footer>
@@ -101,33 +163,53 @@ const PumpAttendant = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Attendant ID</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="6391af5cd9357646b71b328c"
-                autoFocus
-              />
+         
 
 <Form.Label>Attendant Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="eg. Ram Mishra"
-                
+                id="name"
+                name="name"
+                onChange={onChange} 
+               minLength={5} required
+               value={addAttendant.name}
+                autoFocus
+              />
+
+<Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="eg. xyz@gmail.com"
+                id="email"
+              name="email"
+              onChange={onChange} 
+             minLength={5} required
+             value={addAttendant.email}
+              />
+<Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="eg. ****"
+                id="password"
+                name="password"
+                onChange={onChange} 
+               minLength={5} required
+               value={addAttendant.password}
               />
 
 <Form.Label>Contact</Form.Label>
               <Form.Control
                 type="phone"
                 placeholder="eg. 8767987877"
+                id="phone1"
+                name="phone1"
+                onChange={onChange} 
+               minLength={10} required
+               value={addAttendant.phone1}
                 
               />
 
-<Form.Label>Shift</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="eg.Morning / Night"
-                
-              />
             </Form.Group>
      
           </Form>
@@ -136,7 +218,7 @@ const PumpAttendant = () => {
           <Button variant="secondary" onClick={handleCloseAdd}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCloseAdd}>
+          <Button variant="primary" onClick={handleAddAtt}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -156,17 +238,38 @@ const PumpAttendant = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Attendant ID</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="6391af5cd9357646b71b328c"
-                autoFocus
-              />
-
+          
 <Form.Label>Attendant Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="eg. Ram Mishra"
+                id="name"
+                name="name"
+                onChange={onUpdate} 
+               minLength={5} required
+               value={updateAttendant.name}
+                autoFocus
+              />
+
+<Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="eg. xyz@gmail.com"
+                id="email"
+                name="email"
+                onChange={onUpdate} 
+               minLength={5} required
+               value={updateAttendant.email}
+              />
+<Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="eg. ****"
+                id="password"
+                name="password"
+                onChange={onUpdate} 
+               minLength={5} required
+               value={updateAttendant.password}
                 
               />
 
@@ -174,14 +277,11 @@ const PumpAttendant = () => {
               <Form.Control
                 type="phone"
                 placeholder="eg. 8767987877"
-                
-              />
-
-<Form.Label>Shift</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="eg.Morning / Night"
-                
+                id="phone1"
+                name="phone1"
+                onChange={onUpdate} 
+               minLength={10} required
+               value={updateAttendant.phone1}
               />
             </Form.Group>
      
@@ -191,7 +291,7 @@ const PumpAttendant = () => {
           <Button variant="secondary" onClick={handleCloseUpdate}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCloseUpdate}>
+          <Button variant="primary" onClick={()=>handleUpdate(deleteid)}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -279,8 +379,8 @@ const PumpAttendant = () => {
                                                 <td>{item.name}</td>
                                                 <td>{item.phone1}</td>
                                                 <td>morning</td>
-                                                <td onClick={handleShowUpdate} ><i class="fas fa-sharp fa-solid fa-pen"></i></td>
-                                                <td onClick={handleShowDelete} ><i class="fas fa-sharp fa-solid fa-trash ms-2"></i></td>
+                                                <td onClick={()=>handleShowUpdate(item._id)} ><i class="fas fa-sharp fa-solid fa-pen"></i></td>
+                                                <td onClick={()=>handleShowDelete(item._id)} ><i class="fas fa-sharp fa-solid fa-trash ms-2"></i></td>
                                             </tr>
                                         )
                                     })
