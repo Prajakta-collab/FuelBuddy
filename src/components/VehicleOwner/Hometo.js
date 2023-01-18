@@ -1,7 +1,7 @@
 import React, { useState ,useContext, useEffect} from 'react'
-import Navbar from './Navbar'
-import creditContext from '../context/credits/creditContext'
-import VoSidebar from './Sidebar/VoSidebar'
+import Navbar from '../Navbar'
+import creditContext from '../../context/credits/creditContext'
+import VoSidebar from '../Sidebar/VoSidebar'
 
 const Hometo = () => {
   const context = useContext(creditContext);
