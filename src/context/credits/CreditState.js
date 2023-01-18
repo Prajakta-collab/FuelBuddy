@@ -53,9 +53,9 @@ const CreditState = (props) => {
 
    //payment for particular customer -> update credit: pump owner login required
    const postpay= async(id,credit,particulars,reference)=>{
-    console.log(id,credit)
-    credit=Number("credit")
-    console.log(typeof credit)
+  //  let credit=Number(newCredit)
+  console.log("credit in credit state",typeof(credit))
+    
     let response = await fetch(`${host}/api/credit/payment/${id}`,{
       method:"POST",
       headers:{
