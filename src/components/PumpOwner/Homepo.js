@@ -226,7 +226,7 @@ const handleCust=(e)=>{
               <h2 className="fs-2 m-0">Dashboard</h2>
             </div>
 
-            <button
+            {/* <button
               className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
@@ -276,7 +276,7 @@ const handleCust=(e)=>{
                   </ul>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </nav>
 
           <div className="container-fluid px-4">
