@@ -30,7 +30,7 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     console.log("clicked login");
     e.preventDefault();
-    const response = await fetch("http://localhost:5001/api/auth/login", {
+    const response = await fetch("https://fuelbuddybackend.onrender.com/api/auth/login", {
       method: "POST",
 
       headers: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import Transactions from "./components/PumpOwner/Transactions";
@@ -16,8 +16,13 @@ import PumpAttendant from "./components/PumpOwner/PumpAttendant";
 import CreditState from "./context/credits/CreditState";
 import AddCust from "./components/PumpOwner/AddCust";
 import Transactionsto from "./components/VehicleOwner/Transactionsto";
+
 function App() {
+  
+
+ 
   return (
+   
     <div className="App">
       <>
         <CreditState>
