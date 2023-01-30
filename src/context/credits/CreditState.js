@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import creditContext from "./creditContext"
 
 const CreditState = (props) => {
-    const host = "http://localhost:5001";
+    const host = "https://fuelbuddybackend.onrender.com";
        
     const [custcredit,setcustCredit]=useState({"vehicle_owner":"","available_credit":"","allowed_credit":""})
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
