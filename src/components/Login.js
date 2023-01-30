@@ -107,6 +107,7 @@ const Login = (props) => {
                         onChange={handleChange}
                         value={credentials.phone1}
                         className="form-control form-control-lg"
+                        required
                       />
                     </div>
 
@@ -119,14 +120,11 @@ const Login = (props) => {
                         onChange={handleChange}
                         value={credentials.password}
                         className="form-control form-control-lg"
+                        required
                       />
                     </div>
 
-                    <p className="small mb-3 pb-lg-2">
-                      <a className="text-white-50" href="#!">
-                        Forgot password?
-                      </a>
-                    </p>
+                    
                     <div class="dropdown form-outline  mb-4">
                       <DropdownButton
                         alignRight

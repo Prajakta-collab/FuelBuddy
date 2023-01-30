@@ -123,7 +123,7 @@ const Transaction = () => {
                   <div class="dropdown form-outline  ms-5 mt-4 ">
                       <DropdownButton
                         alignRight
-                        title={duration === "" ? "Select UserType" : duration}
+                        title={duration === "" ? "Select Duration" : duration}
                         id="dropdown-menu-align-right"
                         onSelect={handleSelect}
                         

@@ -18,11 +18,20 @@ const Hometo = () => {
   setReq({...req,[e.target.name]:e.target.value})
   console.log(req)
   }
-  const handleClick=(e)=>{
+  const handleClick=async(e)=>{
     e.preventDefault();
-    addRequest(req.debit,req.vehicle_no,"req_received")
+    let json=await addRequest(req.debit,req.vehicle_no,"req_received")
+    console.log(json)
+    if(json.success===true){
+      alert('Request sent successfully!')
+
+    }else if(json.success===false && json.msg==="Your Credit is not enough"){
+      alert("Your Credit is not enough");
+    }
+    else if(json.success===false){
+      alert("Internal Server Error")
+    }
     setReq({debit:"", vehicle_no:""}) 
-    alert('Request sent successfully!')
     }
 
 
@@ -61,13 +70,13 @@ const Hometo = () => {
                             <h2 className="fs-2 m-0">Dashboard</h2>
                         </div>
 
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
-                        </button>
+                        </button> */}
 
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle second-text fw-bold" href="/" id="navbarDropdown"
@@ -81,7 +90,7 @@ const Hometo = () => {
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </nav>
         
       <div class="mt-3 mx-4">

@@ -17,7 +17,7 @@ const HomeAtt = () => {
     useEffect(() => {
         getrequest();
         getcardpumpat();
-    }, [])
+    }, [request])
 
     console.log("request get", request)
 
@@ -71,7 +71,7 @@ const HomeAtt = () => {
                             <i className="fas fa-align-left primary-text fs-4 me-3" onClick={handleToggle} id="menu-toggle"></i>
                             <h2 className="fs-2 m-0">Dashboard</h2>
                         </div>
-
+{/* 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,7 @@ const HomeAtt = () => {
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </nav>
 
                     <div className="row g-3 my-2 w-auto px-4">
