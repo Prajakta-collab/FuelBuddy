@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 
 import Transactions from "./components/PumpOwner/Transactions";
 import About from "./components/About";
@@ -29,7 +29,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               {/* <Redirect to="/login/" /> */}
-              
+              <Route path="/" element={<Navigate to="/login" />} />
 
 
               <Route path="/home/pumpo/:id" element={<Homepo />} />
