@@ -4,6 +4,8 @@ import CountUp from 'react-countup';
 import { Link, useLocation, useHistory } from "react-router-dom";
 import creditContext from '../../context/credits/creditContext';
 import AttSidebar from '../Sidebar/AttSidebar';
+import Swal from 'sweetalert2'
+
 
 const HomeAtt = () => {
   
@@ -156,8 +158,15 @@ const HomeAtt = () => {
                                                 <p class="card-text">Customer ID: {req?.vehicle_owner?._id}</p>
                                                 <p class="card-text">Customer Name :{req?.vehicle_owner?.name}</p>
                                                 <p class="card-text">Requested Credit: {req?.debit}</p>
-                                                <button class="btn btn-outline-primary" onClick={() => {
-                                                    completerequest(req._id)
+                                                <button class="btn btn-outline-primary" onClick={async() => {
+                                                    const ans= await completerequest(req._id);
+                                                    if(ans.success) {
+                                                        Swal.fire(
+                                                            'Done!',
+                                                            'Fuel Delivered Successfully!',
+                                                            'success'
+                                                          )
+                                                    }
                                                 }}>Request Complete</button>
                                             </div>
                                         </div>)

@@ -1,4 +1,5 @@
 import React,{useContext, useState} from 'react'
+import Swal from 'sweetalert2';
 import creditContext from '../../context/credits/creditContext'
 import PoSidebar from '../Sidebar/PoSidebar';
 
@@ -18,8 +19,11 @@ const AddCust = () => {
     e.preventDefault();
     addCustomer(customer.name,customer.email,customer.password,customer.phone1,customer.credit)
     setCustomer({name:"", email:"", password:"" ,phone1:"", credit:""}) 
-    alert('Request sent successfully!')
-
+    Swal.fire(
+      'Done!',
+      'New Customer Created Successfully!',
+      'success'
+    )
  }
 
  //end of new add cust changes
