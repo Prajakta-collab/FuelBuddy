@@ -1,5 +1,6 @@
 import React,{useState,useContext}from 'react';
 import { useNavigate,useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 import creditContext from '../../context/credits/creditContext';
 
 const VoSidebar = () => {
@@ -17,8 +18,12 @@ const VoSidebar = () => {
         localStorage.removeItem('auth-token');
         navigate('/login');
         //props.showAlert("Logged out successfully","success");
-        alert("Logged out successfully");
-    }
+        Swal.fire(
+          'Logout!',
+          'Logout Successfully!',
+          'success'
+        )}   
+       
     
     const handleTr=(e)=>{
     e.preventDefault();

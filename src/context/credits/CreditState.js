@@ -3,6 +3,8 @@ import creditContext from "./creditContext"
 
 const CreditState = (props) => {
     const host = "https://fuelbuddybackend.onrender.com";
+    // const host="http://localhost:5001"
+
        
     const [custcredit,setcustCredit]=useState({"vehicle_owner":"","available_credit":"","allowed_credit":""})
    const [credit, setCredit] = useState({"available_credit":"","utilized_credit":"","allowed_credit":""})
@@ -35,6 +37,7 @@ const CreditState = (props) => {
     });
     const json=await response.json()
     //setDeletecust(json)
+    return json;
   };
 
    //update vehicle owner : pump owner login required
@@ -48,7 +51,12 @@ const CreditState = (props) => {
       body: JSON.stringify({name,email,phone1,phone2,Credit}) 
     });
    const json=await response.json()
-   setUpdatecust(json)
+   console.log(json);
+   setUpdatecust(json);
+   return json;
+
+   
+
   };
 
    //payment for particular customer -> update credit: pump owner login required
@@ -67,7 +75,9 @@ const CreditState = (props) => {
     });
     const json=await response.json()
     console.log("json doc",json)
-    setPay(json)
+    setPay(json);
+    return json;
+
    }
  
    //get all trans for one cust: pump owner
@@ -95,7 +105,7 @@ const CreditState = (props) => {
   };
 
 
-  const updateAtt = async(id,name,email,password,phone1) => {
+  const updateAtt = async(id,name,email,password,phone1,phone2,shift) => {
 
     //add request api call
     console.log("id",id);
@@ -107,18 +117,19 @@ const CreditState = (props) => {
         'auth-token':localStorage.getItem('auth-token')
   
       },
-      body: JSON.stringify({name,email,password,phone1}),
+      body: JSON.stringify({name,email,password,phone1,phone2,shift}),
   
     });
     
-    const json = await response.json()
+    const json = await response.json();
+    return json;
     
   }
   
   
   //end updateattendant
  //addAttendant start
- const addAtt = async(name,email,password,phone1) => {
+ const addAtt = async(name,email,password,phone1,phone2,shift) => {
 
   //add request api call
   let response = await fetch(`${host}/api/auth/createatt`,{
@@ -129,11 +140,12 @@ const CreditState = (props) => {
       'auth-token':localStorage.getItem('auth-token')
 
     },
-    body: JSON.stringify({name,email,password,phone1}),
+    body: JSON.stringify({name,email,password,phone1,phone2,shift}),
 
   });
   
   const json = await response.json()
+  return json;
   
 }
 
@@ -154,7 +166,8 @@ const CreditState = (props) => {
       }
      
     });
-   const json=await response.json()
+   const json=await response.json();
+   return json;
  
   };
 //end of delete dcustomer
@@ -239,7 +252,8 @@ const CreditState = (props) => {
     });
     console.log("api call cust")
     const json=await response.json()
-    setCust(json)
+    console.log("json",json)
+    setCust(json.credits)
 
   }
   
@@ -253,7 +267,8 @@ const CreditState = (props) => {
       }
     });
     const json=await response.json()
-    setCredit(json)
+    console.log("json",json)
+    setCredit(json.credits)
   }
 
 
@@ -311,7 +326,8 @@ const CreditState = (props) => {
 
     });
     
-    const json = await response.json()
+    const json = await response.json();
+    return json;
     
   }
 
@@ -337,7 +353,9 @@ const CreditState = (props) => {
       }
      
     });
-   const json=await response.json()
+   const json=await response.json();
+   return json;
+   
  
   };
 
@@ -358,6 +376,8 @@ const CreditState = (props) => {
     setReq(request.concat(request));
     const json = await response.json()
     console.log("after concat request",request)
+    return json;
+
   }
 
 //search fuel req by vehilce no : Homeatt page search bar

@@ -153,13 +153,18 @@ const Transaction = () => {
                       <th scope="col">Transaction ID</th>
                       <th scope="col">Customer Name</th>
                       <th scope="col">Vehicle Number</th>
+                      <th scope="col">Transaction Date</th>
+
                       <th scope="col">Credit Amount</th>
                       <th scope="col">Debit Amount</th>
                       <th scope="col">Amount Due</th>
+                      <th scope="col">Delivered Date</th>
+
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {console.log("alltr",alltr)}
                     {alltr?.length > 0 &&
                       alltr.map((item) => {
                         return (
@@ -167,9 +172,13 @@ const Transaction = () => {
                             <td>{item?.transaction_no}</td>
                             <td>{item?.vehicle_owner?.name}</td>
                             <td>{item?.vehicle_no}</td>
+                            <td key={2}>{item?.tr_date.substring(0,10)}</td>
+
                             <td>{item?.credit}</td>
                             <td>{item?.debit}</td>
-                            <td>{item?.amount_due}</td>
+                            <td>{item?.amount_due || 0}</td>
+                            <td key={8}>{item?.delivered_date.substring(0,10)}</td>   
+
                             <td
                               className={
                                 item.status === "delivered"

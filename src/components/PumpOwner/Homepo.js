@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import PoSidebar from "../Sidebar/PoSidebar";
+import Swal from "sweetalert2";
 
 const Homepo = () => {
   const context = useContext(creditContext);
@@ -58,8 +59,11 @@ const Homepo = () => {
     localStorage.removeItem('auth-token');
     navigate('/login');
     //props.showAlert("Logged out successfully","success");
-    alert("Logged out successfully");
-}
+    Swal.fire(
+      'Logout!',
+      'Logout Successfully!',
+      'success'
+    )}
 
 const handleTr=(e)=>{
 e.preventDefault();
@@ -295,7 +299,7 @@ const handleCust=(e)=>{
                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                   <div>
                     <h3 className="fs-2">{card.sales}</h3>
-                    <p className="fs-5">Sales</p>
+                    <p className="fs-5">Coming Credits</p>
                   </div>
                   <i className="fas fa-hand-holding-usd fs-1 third-text border rounded-full secondary-bg p-3"></i>
                 </div>
@@ -315,7 +319,7 @@ const handleCust=(e)=>{
                 <div className="p-3  text-light bg-dark shadow-sm d-flex justify-content-around align-items-center rounded">
                   <div>
                     <h3 className="fs-2">{card.credit}</h3>
-                    <p className="fs-5">Credits</p>
+                    <p className="fs-5">Given Credits</p>
                   </div>
                   <i className="fas fa-chart-line fs-1 third-text border rounded-full secondary-bg p-3"></i>
                 </div>
@@ -329,15 +333,19 @@ const handleCust=(e)=>{
                   <thead>
                     <tr>
                       {/* <th scope="col" width="50">#</th> */}
-                      <th scope="col">Customer ID</th>
+                      {/* <th scope="col">Customer ID</th> */}
                       <th scope="col">Customer Name</th>
                       <th scope="col">Total Credit</th>
                       <th scope="col">Available Credit</th>
+                      <th scope="col">Amount Due</th>
+
                     </tr>
                   </thead>
                   <tbody>
+                    {/* {console.log("cust",cust)} */}
                     {cust.length > 0 &&
                       cust.map((item) => {
+                        console.log("item",item)
                         return (
                           <tr className={
                             !item?.vehicle_owner?.isActive && "table-danger"
@@ -348,11 +356,15 @@ const handleCust=(e)=>{
                                 `/home/pumpo/${params.id}/cust/${item.vehicle_owner._id}}`
                               );
                             }}
+
+                            
                           >
-                            <td key={item._id}>{item?.vehicle_owner?._id}</td>
+                            {/* <td key={item._id}>{item?.vehicle_owner?._id}</td> */}
                             <td key={item._id}>{item?.vehicle_owner?.name}</td>
                             <td key={item._id}>{item?.allowed_credit}</td>
                             <td key={item._id}>{item?.available_credit}</td>
+                            <td key={item._id}>{item?.utilized_credit}</td>
+
                           </tr>
                         );
                       })}

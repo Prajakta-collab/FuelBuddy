@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import Alert from "./Alert";
+import Swal from 'sweetalert2'
+
+// CommonJS
+
 
 const Login = (props) => {
   const [credentials, setcredentials] = useState({
@@ -30,6 +33,7 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     console.log("clicked login");
     e.preventDefault();
+    //http://localhost:5001
     const response = await fetch("https://fuelbuddybackend.onrender.com/api/auth/login", {
       method: "POST",
 
@@ -54,7 +58,14 @@ const Login = (props) => {
       // props.showAlert("Logged in Successfully !","success");
 
       navigate(`/home/trucko/${json.data.id}`);
-      alert("Login Succesfully!");
+      // alert("Login Succesfully!");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'LogIn Successful!',
+        showConfirmButton: false,
+        timer: 1500
+      })
       setcredentials({ phone1: "", password: "", userType: "" });
       setUserType("");
     } else if (json.success && json.data.userType === "p_owner") {
@@ -63,7 +74,14 @@ const Login = (props) => {
       console.log("auth-token", localStorage.getItem("auth-token"));
       console.log("zal save");
       navigate(`/home/pumpo/${json.data.id}`);
-      alert("Login Succesfully!");
+      // alert("Login Succesfully!");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'LogIn Successful!',
+        showConfirmButton: false,
+        timer: 1500
+      })
       // props.showAlert("Logged in Successfully !","success");
       setcredentials({ phone1: "", password: "", userType: "" });
       setUserType("");
@@ -73,13 +91,25 @@ const Login = (props) => {
       console.log("auth-token", localStorage.getItem("auth-token"));
       console.log("zal save");
       navigate(`/home/pumpattendant/${json.data.id}`);
-      alert("Login Succesfully!");
+      // alert("Login Succesfully!");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'LogIn Successful!',
+        showConfirmButton: false,
+        timer: 1500
+      })
       // props.showAlert("Logged in Successfully !","success");
       setcredentials({ phone1: "", password: "", userType: "" });
       setUserType("");
     } else {
       // props.showAlert("Invaid Credentials","error")
-      alert("Phone or password is Incorrect !")
+      // alert("Phone or password is Incorrect !")
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Phone or Password Must be Incorrect!',
+      })
       setcredentials({ phone1: "", password: "", userType: "" });
       setUserType("");
     }

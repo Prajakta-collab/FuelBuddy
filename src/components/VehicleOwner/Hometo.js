@@ -2,6 +2,7 @@ import React, { useState ,useContext, useEffect} from 'react'
 import Navbar from '../Navbar'
 import creditContext from '../../context/credits/creditContext'
 import VoSidebar from '../Sidebar/VoSidebar'
+import Swal from 'sweetalert2'
 
 const Hometo = () => {
   const context = useContext(creditContext);
@@ -12,24 +13,66 @@ const Hometo = () => {
   
   useEffect(() => {
     getcredit();
-}, [credit])
+}, [])
 
  const onChange=(e)=>{
   setReq({...req,[e.target.name]:e.target.value})
   console.log(req)
   }
+
   const handleClick=async(e)=>{
     e.preventDefault();
-    let json=await addRequest(req.debit,req.vehicle_no,"req_received")
-    console.log(json)
+     let json=await addRequest(req.debit,req.vehicle_no,"req_received")
+    console.log("json in Hometo",json)
     if(json.success===true){
-      alert('Request sent successfully!')
-
+      // console.log("aali ka g ikde hi")
+      // alert('Request sent successfully!')
+      Swal.fire(
+        'Done!',
+        'Fuel Requested Successfully!',
+        'success'
+      )
+    
     }else if(json.success===false && json.msg==="Your Credit is not enough"){
-      alert("Your Credit is not enough");
-    }
+      Swal.fire({
+        title: '<strong>Not Enough Credit</strong>',
+        icon: 'info',
+        html:
+          'You Do not have this much Credit Left',
+        showCloseButton: true,
+        
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Ok !',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        // cancelButtonText:
+        //   '<i class="fa fa-thumbs-down"></i>',
+        // cancelButtonAriaLabel: 'Thumbs down'
+      })    }
+      else if(json.sucess===false && json.msg==="You can't request more than this amount !"){
+        console.log("in this cant req more than this")
+        Swal.fire({
+          title: '<strong>Limit Reached !</strong>',
+          icon: 'info',
+          html:
+            'Your Requestable Amount limit exceeded',
+          showCloseButton: true,
+          
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Ok !',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+          // cancelButtonText:
+          //   '<i class="fa fa-thumbs-down"></i>',
+          // cancelButtonAriaLabel: 'Thumbs down'
+        }) 
+      }
     else if(json.success===false){
-      alert("Internal Server Error")
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      })
     }
     setReq({debit:"", vehicle_no:""}) 
     }
