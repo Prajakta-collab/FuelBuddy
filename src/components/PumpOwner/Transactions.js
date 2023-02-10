@@ -164,6 +164,7 @@ const Transaction = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    {console.log("alltr",alltr)}
                     {alltr?.length > 0 &&
                       alltr.map((item) => {
                         return (

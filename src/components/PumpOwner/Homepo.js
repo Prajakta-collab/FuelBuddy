@@ -342,7 +342,7 @@ const handleCust=(e)=>{
                     </tr>
                   </thead>
                   <tbody>
-                    {console.log("cust",cust.credits)}
+                    {/* {console.log("cust",cust)} */}
                     {cust.length > 0 &&
                       cust.map((item) => {
                         console.log("item",item)
