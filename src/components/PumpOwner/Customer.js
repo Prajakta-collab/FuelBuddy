@@ -8,12 +8,11 @@ import PoSidebar from '../Sidebar/PoSidebar';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import CurrencyInput from 'react-currency-input-field';
 
 
 const Customer = () => {
 
-
-  const ref = useRef(null)
 
   const params = useParams();
   console.log("params", params.id)
@@ -27,7 +26,6 @@ const Customer = () => {
     getcusttr(idd);
   }, [])
 
-  const [openModal, setOpenModal] = useState(false);
 
   // Update Button on click 
   const [showUpdate, setShowUpdate] = useState(false);
@@ -69,22 +67,28 @@ const Customer = () => {
   const handleCloseRenew = () => setShowRenew(false);
   const handleShowRenew = () => setShowRenew(true);
 
-  const[pay,setPay]=useState({credit: "", particulars: "" ,reference:""})
+  const[pay,setPay]=useState({ newCredit:0,particulars: "" ,reference:""})
   const onChange = (e) => {
+    console.log("e.target.value",typeof(e.target.value));
     setPay({ ...pay, [e.target.name]: e.target.value })
-    console.log(pay)
-  }
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log(pay)
-    postpay(idd,pay.credit, pay.particulars, pay.reference)
-    setPay({ credit: "", particulars: "" ,reference:""})
-    alert('Payment successful!')
+    console.log("pay.credit",pay.newCredit)
   }
 
-  const handleModal = () => {
-    setOpenModal(true);
+  
+
+
+  console.log("pay before handleClick",pay);
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("pay",pay)
+    postpay(idd,parseInt(pay.newCredit,10), pay.particulars, pay.reference)
+    setPay({ newCredit:0, particulars: "" ,reference:""})
+
+    alert('Payment successful!')
+    setShowRenew(false);
   }
+
+  
 
 
   return (
@@ -208,16 +212,20 @@ const Customer = () => {
               <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Credit</p></label></div>
               <div class="w-75">
                 <input
-                  type="text"
-                  id="credit"
-                  name="credit"
+                  type="number"
+                  id="newCredit"
+                  name="newCredit"
                   className="form-control"
                   placeholder="Enter amount in Rs"
+                  step="500"
                   onChange={onChange}
-                  minLength={1} required
-                  value={pay.credit}
+                  min="500"
+                 
+                  
+                  value={pay.newCredit}
                 />
-              </div>
+                
+                              </div>
             </div>
             <div class="mb-3 mr-auto d-flex" >
               <div class="mx-3 mt-1"><label class="form-label"><p class="h6">Particulars</p></label></div>
@@ -426,16 +434,16 @@ const Customer = () => {
                                             custtr.map((item) => {
                                                 return (
                                                     <tr>
-                                                        <td key={item._id}>{item?.transaction_no}</td>
-                                                        <td key={item._id}>{item?.tr_date.substring(0,10)}</td>
-                                                        <td key={item._id}>{item?.vehicle_no}</td>
-                                                        <td key={item._id}>{item?.debit}</td>
-                                                        <td key={item._id}>{item?.credit}</td>
-                                                        <td key={item._id}>{item?.amount_due}</td>
+                                                        <td key={1}>{item?.transaction_no}</td>
+                                                        <td key={2}>{item?.tr_date.substring(0,10)}</td>
+                                                        <td key={3}>{item?.vehicle_no}</td>
+                                                        <td key={4}>{item?.debit}</td>
+                                                        <td key={5}>{item?.credit}</td>
+                                                        <td key={6}>{item?.amount_due}</td>
 
 
-                                                        <td key={item._id}>{item?.status}</td>
-                                                        <td key={item._id}>{item?.delivered_date.substring(0,10)}</td>                                                      
+                                                        <td key={7}>{item?.status}</td>
+                                                        <td key={8}>{item?.delivered_date.substring(0,10)}</td>                                                      
                                                     </tr>
                                                 )
                                             })
