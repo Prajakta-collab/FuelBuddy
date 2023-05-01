@@ -1,6 +1,7 @@
 import React,{useContext, useState} from 'react'
 import creditContext from '../../context/credits/creditContext'
 import PoSidebar from '../Sidebar/PoSidebar';
+import { useForm } from "react-hook-form";
 
 
 const AddCust = () => {
@@ -9,7 +10,7 @@ const AddCust = () => {
 //new add cust changes
  const context = useContext(creditContext);
   const { addCustomer,handleToggle,toggle } = context;
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
  
 
   const[customer,setCustomer]=useState({name:"", email:"", password:"" ,phone1:"", credit:""})
@@ -100,7 +101,7 @@ setCustomer({...customer,[e.target.name]:e.target.value})
           <div className="form-group my-3">
             <label htmlFor="title" >Name</label>
             <input
-              type="text"
+              type="text"{...register("firstName")}
               className="form-control"
               id="name"
               name="name"
@@ -123,6 +124,7 @@ setCustomer({...customer,[e.target.name]:e.target.value})
               onChange={onChange} 
              minLength={5} required
              value={customer.email}
+        
             />
           </div>
           <div className="form-group my-3">
@@ -176,6 +178,7 @@ setCustomer({...customer,[e.target.name]:e.target.value})
               placeholder="Enter Credit Amount in Rs"
               onChange={onChange}
               value={customer.credit}
+              
             />
 
           </div>
