@@ -400,7 +400,12 @@ const Customer = () => {
                             <div >
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
-                                        <h3 className="fs-2">Name : {custdetails?.user?.name}</h3>
+                                        <h6 className="fs-5">Name : {custdetails?.user?.name} 
+                             
+                                        <span style={{marginRight:"20px",marginLeft:"620px" }} class="logged-in " ><i class="fa fa-circle " style={{color:"green"}} aria-hidden="true"></i> Active</span>
+                                        <span  class="logged-out" ><i class="fa fa-circle" style={{color:"red"}} aria-hidden="true"></i>  Inactive</span>   </h6>
+                                      
+       
                                         <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
                                         <p className="fs-5">Email : {custdetails?.user?.email}</p>
                                         <p className="fs-5">Remaining Credit : {custdetails?.liveCredit?.available_credit}</p>
@@ -413,6 +418,7 @@ const Customer = () => {
                               <button type="button"  onClick={handleShowRenew} class="btn btn-outline-success me-5 btn-lg">Payment<i class="fas fa-solid fa-user-plus ms-2"></i></button>
                               <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                               <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success ms-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen ms-2"></i></button>
+                              <button type="button" class="btn btn-outline-warning ms-5 btn-lg">Reactivate <i class="fa fa-refresh" aria-hidden="true"></i></button>
                               
                                 
                              

@@ -88,7 +88,7 @@ const Transactionsto = () => {
                                     <div class="m-auto">
                                         <select>
 
-                                            <option value="Daliy">Daliy</option>
+                                            <option value="Daily">Daily</option>
 
                                             <option value="Last 7 days">Last 7 days</option>
 
@@ -96,6 +96,9 @@ const Transactionsto = () => {
                                             <option value="YTD">YTD</option>
 
                                         </select>
+                                    </div>
+                                    <div>
+                                    <button type="button" class="btn btn-outline-success ms-5 btn-lg">Download  Report <i class="fa fa-download" aria-hidden="true"></i></button>
                                     </div>
 
                                     
