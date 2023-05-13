@@ -24,7 +24,7 @@ const Customer = () => {
 
   useEffect(() => {
     getcusttr(idd);
-  }, [])
+  }, [idd])
 
 
   // Update Button on click 
