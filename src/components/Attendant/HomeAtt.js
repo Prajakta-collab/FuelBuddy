@@ -4,6 +4,8 @@ import CountUp from 'react-countup';
 import { Link, useLocation, useHistory } from "react-router-dom";
 import creditContext from '../../context/credits/creditContext';
 import AttSidebar from '../Sidebar/AttSidebar';
+import Swal from 'sweetalert2'
+
 
 const HomeAtt = () => {
   
@@ -17,7 +19,7 @@ const HomeAtt = () => {
     useEffect(() => {
         getrequest();
         getcardpumpat();
-    }, [])
+    }, [request])
 
     console.log("request get", request)
 
@@ -71,7 +73,7 @@ const HomeAtt = () => {
                             <i className="fas fa-align-left primary-text fs-4 me-3" onClick={handleToggle} id="menu-toggle"></i>
                             <h2 className="fs-2 m-0">Dashboard</h2>
                         </div>
-
+{/* 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +94,7 @@ const HomeAtt = () => {
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </nav>
 
                     <div className="row g-3 my-2 w-auto px-4">
@@ -156,8 +158,15 @@ const HomeAtt = () => {
                                                 <p class="card-text">Customer ID: {req?.vehicle_owner?._id}</p>
                                                 <p class="card-text">Customer Name :{req?.vehicle_owner?.name}</p>
                                                 <p class="card-text">Requested Credit: {req?.debit}</p>
-                                                <button class="btn btn-outline-primary" onClick={() => {
-                                                    completerequest(req._id)
+                                                <button class="btn btn-outline-primary" onClick={async() => {
+                                                    const ans= await completerequest(req._id);
+                                                    if(ans.success) {
+                                                        Swal.fire(
+                                                            'Done!',
+                                                            'Fuel Delivered Successfully!',
+                                                            'success'
+                                                          )
+                                                    }
                                                 }}>Request Complete</button>
                                             </div>
                                         </div>)

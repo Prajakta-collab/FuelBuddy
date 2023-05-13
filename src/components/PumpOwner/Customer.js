@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import CurrencyInput from 'react-currency-input-field';
+import Swal from 'sweetalert2';
 
 
 const Customer = () => {
@@ -20,12 +21,15 @@ const Customer = () => {
   console.log("params after", idd);
   const context = useContext(creditContext);
 
-  const { postpay, custdetails, getcusttr, custtr, handleToggle,updatecust,deletecust, toggle } = context;
+  const { postpay, custdetails,getcusttr, getcustdetails,custtr, handleToggle,updatecust,deletecust, toggle } = context;
 
   useEffect(() => {
     getcusttr(idd);
-  }, [idd])
+  }, [custtr])
 
+  useEffect(()=>{
+    getcustdetails(idd);
+  },[custdetails])
 
   // Update Button on click 
   const [showUpdate, setShowUpdate] = useState(false);
@@ -41,8 +45,13 @@ const Customer = () => {
     e.preventDefault();
     updatecust(idd,upcust.name, upcust.email, upcust.phone1, upcust.phone2, upcust.credit)
     setUpcust({ name: "", email: "" , phone1:"", phone2:"", credit:""})
-    alert('Update successful!')
-    console.log(updatecust)
+    Swal.fire(
+      'Done!',
+      'Customer Updated Successfully!',
+      'success'
+    )
+    // alert('Update successful!')
+    handleCloseUpdate();
   }
   // Delete Button on click  
   const [showdelete, setShowDelete] = useState(false);
@@ -53,8 +62,14 @@ const Customer = () => {
   const handleDelete=(e)=>{
     e.preventDefault();
     deletecust(idd)
-    alert('Delete successful!')
-  }
+    Swal.fire(
+      'Done!',
+      'Customer Deleted Successfully!',
+      'success'
+    ) 
+
+    handleCloseDelete()
+   }
   // Add Button on click 
   const [showadd, setShowAdd] = useState(false);
 
@@ -84,8 +99,12 @@ const Customer = () => {
     postpay(idd,parseInt(pay.newCredit,10), pay.particulars, pay.reference)
     setPay({ newCredit:0, particulars: "" ,reference:""})
 
-    alert('Payment successful!')
-    setShowRenew(false);
+    Swal.fire(
+      'Done!',
+      'Payment Done Successfully!',
+      'success'
+    )    
+    handleCloseRenew()
   }
 
   
@@ -416,7 +435,9 @@ const Customer = () => {
                             <div className="col">
                                 <table className="table bg-white rounded shadow-sm  table-hover">
                                     <thead>
-                                        <tr>
+                                        <tr
+                                        
+                                        >
                                             <th scope="col">Transaction No.</th>
                                             <th scope="col">Transaction Date</th>
                                             <th scope="col">Vehicle No.</th>
@@ -424,8 +445,9 @@ const Customer = () => {
                                             <th scope="col">Credit Amount</th>
                                             <th scope="col">Amount Due</th>
 
-                                            <th scope="col">Status</th>
                                             <th scope="col">Delivered Date</th>
+                                            <th scope="col">Status</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -433,17 +455,19 @@ const Customer = () => {
                                             custtr.length > 0 &&
                                             custtr.map((item) => {
                                                 return (
-                                                    <tr>
+                                                    <tr
+                                                    >
                                                         <td key={1}>{item?.transaction_no}</td>
                                                         <td key={2}>{item?.tr_date.substring(0,10)}</td>
                                                         <td key={3}>{item?.vehicle_no}</td>
                                                         <td key={4}>{item?.debit}</td>
                                                         <td key={5}>{item?.credit}</td>
-                                                        <td key={6}>{item?.amount_due}</td>
+                                                        <td key={6}>{item?.amount_due || 0}</td>
+                                                        <td key={8}>{item?.delivered_date.substring(0,10)}</td>   
 
 
-                                                        <td key={7}>{item?.status}</td>
-                                                        <td key={8}>{item?.delivered_date.substring(0,10)}</td>                                                      
+                                                        <td className={item.status==='delivered'?"table-success":"table-danger"}>{item.status}</td>
+                                                   
                                                     </tr>
                                                 )
                                             })
