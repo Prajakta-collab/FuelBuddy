@@ -449,8 +449,8 @@ const handlereactive=(idd)=>{
                                         <h6 className="fs-5">Name : {custdetails?.user?.name} 
                                        
                                         
-                                                                      <span style={{marginRight:"20px",marginLeft:"620px" }} class="logged-in " >{custdetails?.user?.isActive===true?"Active" :"InActive"}<i class="fa fa-circle " style={ custdetails?.user?.isActive===true ? { color:'green'} : {color:'red'}}
- aria-hidden="true"></i> </span>
+                                                                      <span style={{marginRight:"20px",marginLeft:"620px" }} class="logged-in " >  <i class="fa fa-circle " style={ custdetails?.user?.isActive===true ? { color:'green'} : {color:'red'}}
+ aria-hidden="true"></i> {custdetails?.user?.isActive===true?"Active" :"InActive"} </span>
                                                                       {/* <span  class="logged-out" ><i class="fa fa-circle" style={{color:"red"}} aria-hidden="true"></i>  Inactive</span>    */}
                                                                       </h6>
                              
