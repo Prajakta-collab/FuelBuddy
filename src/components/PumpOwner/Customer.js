@@ -21,7 +21,7 @@ const Customer = () => {
   console.log("params after", idd);
   const context = useContext(creditContext);
 
-  const { postpay, custdetails,getcusttr, getcustdetails,custtr, handleToggle,updatecust,deletecust, toggle } = context;
+  const { postpay, custdetails,getcusttr, getcustdetails,custtr, handleToggle,updatecust,deletecust, toggle,reactive } = context;
 
   useEffect(() => {
     getcusttr(idd);
@@ -30,7 +30,9 @@ const Customer = () => {
   useEffect(()=>{
     getcustdetails(idd);
   },[custdetails])
+  console.log("cust",custdetails)
 
+  
   // Update Button on click 
   const [showUpdate, setShowUpdate] = useState(false);
 
@@ -53,12 +55,37 @@ const Customer = () => {
     // alert('Update successful!')
     handleCloseUpdate();
   }
+
+
   // Delete Button on click  
   const [showdelete, setShowDelete] = useState(false);
 
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
   // const[delcust,setDelcust]=useState({})
+
+  // reactivate Button on click 
+  const [Reactive, setReactive] = useState(false);
+
+  const handlecloseReactive = () => setReactive(false);
+  const handleShowReactive = () => setReactive(true);
+
+//reactive start
+const handlereactive=(idd)=>{
+  
+  reactive(idd)
+  
+
+ }
+
+
+
+
+
+
+
+//reactive end
+
   const handleDelete=(e)=>{
     e.preventDefault();
     deletecust(idd)
@@ -215,6 +242,25 @@ const Customer = () => {
           </Button>
           <Button variant="primary" onClick={handleDelete}>
             Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+  {/* Reactivate Button Modal */}
+
+  <Modal show={Reactive} onHide={handlecloseReactive} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reactivate Customer </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure ,you want to Reactivate  the customer</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handlecloseReactive}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={()=>handlereactive(idd)}>
+            Reactivate
           </Button>
         </Modal.Footer>
       </Modal>
@@ -401,9 +447,15 @@ const Customer = () => {
                                 <div className="p-3 text-light bg-dark shadow-sm d-flex  align-items-center rounded">
                                     <div>
                                         <h6 className="fs-5">Name : {custdetails?.user?.name} 
+                                       
+                                        
+                                                                      <span style={{marginRight:"20px",marginLeft:"620px" }} class="logged-in " >{custdetails?.user?.isActive===true?"Active" :"InActive"}<i class="fa fa-circle " style={ custdetails?.user?.isActive===true ? { color:'green'} : {color:'red'}}
+ aria-hidden="true"></i> </span>
+                                                                      {/* <span  class="logged-out" ><i class="fa fa-circle" style={{color:"red"}} aria-hidden="true"></i>  Inactive</span>    */}
+                                                                      </h6>
                              
-                                        <span style={{marginRight:"20px",marginLeft:"620px" }} class="logged-in " ><i class="fa fa-circle " style={{color:"green"}} aria-hidden="true"></i> Active</span>
-                                        <span  class="logged-out" ><i class="fa fa-circle" style={{color:"red"}} aria-hidden="true"></i>  Inactive</span>   </h6>
+                                        
+                                       
                                       
        
                                         <p className="fs-5">Contact No : {custdetails?.user?.phone1}</p>
@@ -418,7 +470,7 @@ const Customer = () => {
                               <button type="button"  onClick={handleShowRenew} class="btn btn-outline-success me-5 btn-lg">Payment<i class="fas fa-solid fa-user-plus ms-2"></i></button>
                               <button type="button" onClick={handleShowDelete} class="btn btn-outline-danger btn-lg">Delete<i class="fas fa-sharp fa-solid fa-trash ms-2"></i></button>
                               <button type="button" onClick={handleShowUpdate} class="btn btn-outline-success ms-5 btn-lg">Update<i class="fas fa-sharp fa-solid fa-pen ms-2"></i></button>
-                              <button type="button" class="btn btn-outline-warning ms-5 btn-lg">Reactivate <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                              <button type="button" onClick={handleShowReactive} class="btn btn-outline-warning ms-5 btn-lg">Reactivate <i class="fa fa-refresh" aria-hidden="true"></i></button>
                               
                                 
                              

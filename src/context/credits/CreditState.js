@@ -24,6 +24,7 @@ const CreditState = (props) => {
    const[custtr,setCusttr]=useState({"transaction_no":"","tr_date":"","vehicle_no":"","debit":""})
    const[pay,setPay]= useState({})
    const[upcust,setUpdatecust]=useState({})
+   
   // const[delcust,setDeletecust]=useState({})
 
    //delete vehicle owner
@@ -334,8 +335,25 @@ const CreditState = (props) => {
 
 //end addcust
 
+////reactive start
+const reactive = async (idd) => {
+  //edit request here
+ console.log("in reactive")
+  let response = await fetch(`${host}/api/auth/updatestatus/${idd}`, {
+    method: "PUT",
 
+    headers: {
+      "Content-Type": "application/json",
+      'auth-token':localStorage.getItem('auth-token')
 
+    }
+   
+  });
+ 
+ 
+
+};
+//reactive end
 
 
 
@@ -442,7 +460,7 @@ const filterByDuration = async(duration) => {
   return (
 
 
-    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,deleteAtt,addAtt,updateAtt,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle}}>
+    <creditContext.Provider value={{pay,upcust,deletecust,updatecust,postpay,getownalltr,filterByDuration,searchByName,searchByvno,request,custdetails,deleteAtt,addAtt,updateAtt,cardpump,alltr,allatt,custtr,getcusttr,getcustdetails,getallatt,getalltr,getcardpumpat,credit,cust,custcredit,card,getcardsdetail,getcustomer,getrequest,completerequest,addRequest,addCustomer,getcredit,handleToggle,toggle,reactive}}>
 
 
     {props.children}
